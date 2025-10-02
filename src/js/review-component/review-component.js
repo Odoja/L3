@@ -9,7 +9,7 @@ template.innerHTML = `
         <textarea name="review" placeholder="Write you're review here" required></textarea>
       </div>
       <div id="bottom-section">
-        <div id="star-rating">
+        <div class="star-rating">
           <span>Rating:</span>
           <input type="hidden" name="rating" id="rating" value="" required>
           <svg class="star" data-value="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
@@ -264,7 +264,7 @@ customElements.define('review-component',
     }
 
     // Helper methods
-    createContainer () {
+    createContainer (review) {
       const container = document.createElement('div')
       container.classList.add('comment-container')
       container.appendChild(this.createUsername(review))
@@ -286,8 +286,26 @@ customElements.define('review-component',
     }
 
     createRating (review) {
-      const rating = document.createElement('span')
-      rating.textContent = `Rating: ${review.rating}/5` // change from numbers to stars.
+      const amountOfStars = review.rating
+
+      const rating = document.createElement('div')
+      rating.classList.add('review-rating')
+
+      for (let i = 1; i <= amountOfStars; i++) {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+        svg.classList.add('star')
+        svg.setAttribute('data-value', i)
+        svg.setAttribute('viewBox', '0 0 24 24')
+        svg.setAttribute('fill', 'currentColor')
+        svg.stylepointerEvents = 'none'
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+        path.setAttribute('d', 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25 L7 14.14 2 9.27l6.91-1.01L12 2z')
+
+        svg.appendChild(path)
+        rating.appendChild(svg)
+      }
+
       return rating
     }
   }
