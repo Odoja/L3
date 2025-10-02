@@ -17,18 +17,18 @@ export class ReviewRenderer {
   * @param {*} reviews - a list with reviews.
   */
   renderReviews (reviews) {
-    const commentSection = this.shadowRoot.getElementById('comment-section')
-    commentSection.innerHTML = ''
+    const reviewSection = this.shadowRoot.getElementById('review-section')
+    reviewSection.innerHTML = ''
 
     reviews.forEach(review => {
-      commentSection.appendChild(this.createContainer(review))
+      reviewSection.appendChild(this.createContainer(review))
     })
   }
 
   // Helper methods
   createContainer (review) {
     const container = document.createElement('div')
-    container.classList.add('comment-container')
+    container.classList.add('review-container')
     container.appendChild(this.createUsername(review))
     container.appendChild(this.createReview(review))
     container.appendChild(this.createRating(review))

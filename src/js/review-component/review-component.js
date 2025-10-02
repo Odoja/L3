@@ -188,7 +188,7 @@ customElements.define('review-component',
     }
 
     /**
-     * Sorting logic for the comments.
+     * Sorting logic for the reviews.
      *
      * @param {string} filterOption - the filter the code is going to sort by.
      */
