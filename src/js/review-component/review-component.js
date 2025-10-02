@@ -33,14 +33,14 @@ template.innerHTML = `
         <button type="submit" id="review-btn">Send</button>
       </div>
     </form>
-    <div id="comment-wrapper"> 
+    <div id="review-wrapper"> 
       <select name="" id="filter-option" class="hidden">
         <option value="Newest">Newest Reviews</option>
         <option value="Oldest">Oldest Reviews</option>
         <option value="Top-rated">Highest Rating</option>
         <option value="Lowest-rated">Lowest Rating</option>
       </select>
-      <div id="comment-section">
+      <div id="review-section">
       </div> 
     </div>
   </div>
@@ -183,7 +183,7 @@ customElements.define('review-component',
     filterSetup () {
       const filterOption = this.shadowRoot.getElementById('filter-option')
       filterOption.addEventListener('change', (e) => {
-        this.commentFilter(e.target.value)
+        this.reviewFilter(e.target.value)
       })
     }
 
@@ -192,7 +192,7 @@ customElements.define('review-component',
      *
      * @param {string} filterOption - the filter the code is going to sort by.
      */
-    async commentFilter (filterOption) {
+    async reviewFilter (filterOption) {
       try {
         const reviews = await this.fetchReviews()
 
