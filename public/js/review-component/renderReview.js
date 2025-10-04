@@ -21,12 +21,12 @@ export class ReviewRenderer {
     reviewSection.innerHTML = ''
 
     reviews.forEach(review => {
-      reviewSection.appendChild(this.createContainer(review))
+      reviewSection.appendChild(this.createReviewContainer(review))
     })
   }
 
   // Helper methods
-  createContainer (review) {
+  createReviewContainer (review) {
     const container = document.createElement('div')
     container.classList.add('review-container')
     container.appendChild(this.createUsername(review))

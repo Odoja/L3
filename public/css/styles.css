@@ -1,0 +1,486 @@
+/*style*/
+
+* {
+  margin: 0;
+  padding: 0;
+  word-spacing: 3px;
+  color: white;
+  box-sizing: border-box;
+}
+
+/*--------------------------------- Index ---------------------------------*/
+
+body {
+  background-color: #ffffff;
+  font-family: "segoe UI", sans-serif, Verdana, "Geneva";
+  display: grid;
+  font-size: 1.125rem;
+  grid-template-columns: 1fr;
+  grid-template-rows: 6vw 30vw auto auto min-content;
+  grid-template-areas:
+    " Header "
+    " bild "
+    " Nav "
+    " main "
+    "footer ";
+}
+
+
+/*--------------------------------- Headlines ---------------------------------*/
+
+h1 {
+  font-size: 2.75rem;
+  margin-top: 0;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+  font-size: 2.05rem;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+h3 {
+  font-size: 1.7rem;
+  margin: 0;
+}
+
+h4 {
+  margin: 0;
+}
+
+/*--------------------------------- Href ---------------------------------*/
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+/*--------------------------------- Sections ---------------------------------*/
+
+.SectionStyle {
+  width: 100%;
+  font-weight: 100;
+}
+
+.size {
+  font-size: 1.25rem;
+  margin: 2.5rem auto;
+  padding: 0 4.5rem 0 4.5rem;
+  line-height: 1.5;
+}
+
+.introductionText {
+  left: 0;
+  max-width: 60%;
+  line-height: 1.5;
+}
+
+#LocalNavSection {
+  grid-area: Nav;
+}
+
+#MainPageSection {
+  grid-area: main;
+  z-index: 5;
+}
+
+.DarkSection {
+  position: relative;
+  background-color: #141414;
+  color: #ffffff;
+  padding: 2% 9.5% 5% 9.5%;
+}
+
+.DarkSectionHalf {
+  position: relative;
+  background: linear-gradient(to bottom, #ffffff 50%, #141414 50%);
+  color: #ffffff;
+  padding: 2% 9.5% 5% 9.5%;
+}
+
+.LightSection {
+  position: relative;
+  background-color: #ffffff;
+  color: #141414;
+  padding: 2% 9.5% 5% 9.5%;
+}
+
+.LightSectionHalf {
+  position: relative;
+  background: linear-gradient(to bottom, #141414 50%, #ffffff 50%);
+  color: #141414;
+  padding: 2% 9.5% 5% 9.5%;
+}
+
+.DarkBackground {
+  position: absolute;
+  inset: 0;
+  background-color: #202020;
+  clip-path: polygon(0 0, 100% 50%, 100% 100%, 0% 50%);
+  z-index: 0;
+}
+
+.DarkHalfBackground {
+  position: absolute;
+  inset: 0;
+  background-color: #202020;
+  clip-path: polygon(0 0, 100% 50%, 100% 50%, 0% 50%);
+  z-index: 0;
+}
+
+.LightBackground {
+  position: absolute;
+  inset: 0;
+  background-color: antiquewhite;
+  clip-path: polygon(0 0, 100% 50%, 100% 100%, 0% 50%);
+  z-index: 0;
+}
+
+.LightHalfBackground {
+  position: absolute;
+  inset: 0;
+  background-color: antiquewhite;
+  clip-path: polygon(0 50%, 100% 50%, 100% 100%);
+  z-index: 0;
+}
+
+/*------------------ Picture Section -------------------*/
+
+.PictureSection {
+  position: relative;
+  left: 0;
+}
+
+.PicWrapper {
+  display: flex;
+  width: min-content;
+  flex-direction: column;
+}
+
+.PictureRow {
+  display: flex;
+  flex-wrap: nowrap;
+  scroll-behavior: smooth;
+  gap: 20px;
+  overflow-x: auto;
+}
+
+.PictureRow::-webkit-scrollbar {
+  display: none;
+}
+
+.PicRowPicBoxText {
+  position: relative;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.PicRowPicBoxTextInfo {
+  font-size: 1rem;
+  width: 90%;
+}
+
+.PictureSectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+}
+
+.Header-Text {
+  display: flex;
+  flex-direction: column;
+}
+
+.Light-Header-Text {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+/*------------------ Section 2 -------------------*/
+
+
+/*--------------------------------- Transport Sections ---------------------------------*/
+
+.bus-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.bus-container h3 {
+  text-align: center;
+}
+
+/*--------------------------------- General Picture Rules ---------------------------------*/
+
+#bild {
+  grid-area: bild;
+  width: 100%;
+  aspect-ratio: 1814/681;
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  opacity: 1;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.fade-img {
+  grid-area: bild;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.NavPicBox {
+  position: relative;
+  width: 360px;
+  height: 210px;
+  overflow: hidden;
+  display: inline-block;
+  text-decoration: none;
+  margin: 5px;
+  box-shadow: 0px 3px 10px black;
+}
+
+.PicRowBox,
+.PicRowBox2,
+.LaSPicRowBox,
+.MainPagePicRowBox,
+.MainPagePicRowBox2 {
+  position: relative;
+  overflow: hidden;
+  height: 360px;
+  width: 350px;
+  box-shadow: 0px 0px 2px 0px black;
+  flex: 0 0 auto;
+}
+
+.PicRowBox2 {
+  width: 720px;
+}
+
+.MainPagePicRowBox2 {
+  width: 1000px;
+  height: 360px;
+}
+
+.LaSPicRowBox {
+  width: 275px;
+  height: 172px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 20px 0px rgb(185, 185, 185);
+}
+
+.NavPicBox::before,
+.PicRowBox::before,
+.PicRowBox2::before,
+.MainPagePicRowBox::before,
+.MainPagePicRowBox2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-position: center;
+  background-size: cover;
+  transition: transform 1s ease;
+  z-index: 0;
+}
+
+.NavPicBox:hover::before,
+.PicRowBox:hover::before,
+.PicRowBox2:hover::before {
+  transform: scale(1.1);
+}
+
+.PicBoxText1 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 1.75rem;
+  background-color: #7c7c7c9a;
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0;
+  text-decoration: none;
+  text-shadow: 2px 1px 3px black;
+}
+
+/*--------------------------------- Footer ---------------------------------*/
+
+footer {
+  grid-area: footer;
+  background-color: #333;
+  padding: 20px 0;
+  color: white;
+  font-size: 0.875rem;
+
+  .footer-container {
+    display: flex;
+    max-width: 1200px;
+    min-height: 100px;
+    margin: auto;
+  }
+
+  .footer-section {
+    margin: auto;
+  }
+
+}
+
+
+/*--------------------------------- 1440px Screen ---------------------------------*/
+
+@media (max-width: 1441px) {
+  body {
+    font-size: 1.06rem;
+  }
+
+  h1 {
+    font-size: 2.585rem;
+  }
+
+  h2 {
+    font-size: 1.76rem;
+  }
+
+  h3 {
+    font-size: 1.41rem;
+    margin: 0;
+  }
+
+  nav li button,
+  nav li a,
+  #contact {
+    font-size: 1.18rem;
+  }
+
+  .size {
+    font-size: 1.18rem;
+    margin: 2.35rem auto;
+    line-height: 1.5;
+  }
+
+  .introductionText {
+    font-size: 1rem;
+    max-width: 70%;
+  }
+
+  .NavPicBox {
+    width: 270px;
+    height: 158px;
+  }
+
+  .PicRowBox,
+  .PicRowBox2,
+  .LaSPicRowBox,
+  .MainPagePicRowBox {
+    width: 263px;
+    height: 270px;
+  }
+
+  .MainPagePicRowBox2 {
+    width: 750px;
+    height: 263px;
+  }
+
+  .PicRowBox2 {
+    width: 540px;
+  }
+
+  .LaSPicRowBox {
+    width: 206px;
+    height: 129px;
+  }
+
+  .PicRowPicBoxTextInfo {
+    font-size: 0.875rem;
+  }
+
+  .scroll-btn-page {
+    width: 40px;
+    height: 40px;
+  }
+
+}
+
+
+/*--------------------------------- 1024px Screen ---------------------------------*/
+
+
+@media (max-width: 1025px) {
+  body {
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 2.45rem;
+  }
+
+  h2 {
+    font-size: 1.67rem;
+  }
+
+  h3 {
+    font-size: 1.335rem;
+    margin: 0;
+  }
+
+  nav li button,
+  nav li a,
+  #contact {
+    font-size: 1.1rem;
+  }
+
+  .size {
+    font-size: 1.1rem;
+    margin: 2.225rem auto;
+    line-height: 1.5;
+  }
+
+  .introductionText {
+    font-size: 0.875rem;
+    max-width: 80%;
+  }
+
+  .NavPicBox {
+    width: 192px;
+    height: 112px;
+  }
+
+  .PicRowBox,
+  .PicRowBox2,
+  .LaSPicRowBox,
+  .MainPagePicRowBox {
+    width: 187px;
+    height: 192px;
+  }
+
+  .MainPagePicRowBox2 {
+    width: 533px;
+    height: 187px;
+  }
+
+  .PicRowBox2 {
+    width: 384px;
+  }
+
+  .LaSPicRowBox {
+    width: 147px;
+    height: 92px;
+  }
+
+  .PicRowPicBoxTextInfo {
+    font-size: 0.75rem;
+  }
+
+
+  .scroll-btn-page {
+    width: 35px;
+    height: 35px;
+  }
+
+}

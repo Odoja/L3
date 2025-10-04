@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kansai</title>
+  <link rel="icon" type="image/png" href="./img/KansaiTitleEmblem.png">
+  <base href="<%= baseURL %>" />
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/pictures.css">
+  <%- defineContent('style') %>
+  <script type="module" src="./js/index.js"></script>
+  <%- defineContent('script') %>
+</head>
+
+<body>
+  <%- body %>
+  <%- include('../footer/footer') %>
+</body>
+
+</html>
