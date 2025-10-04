@@ -16,10 +16,10 @@ body {
   display: grid;
   font-size: 1.125rem;
   grid-template-columns: 1fr;
-  grid-template-rows: 6vw 30vw auto auto min-content;
+  grid-template-rows: 6vw 1fr auto auto min-content;
   grid-template-areas:
     " Header "
-    " bild "
+    " Bild "
     " Nav "
     " main "
     "footer ";
@@ -77,7 +77,44 @@ a {
 
 #LocalNavSection {
   grid-area: Nav;
+  margin: 15px 0px;
+  display: flex;
+  justify-content: center;
+
+  #RestaurantTypes {
+    display: flex;
+    color: #141414;
+    justify-content: center;
+    /* border: solid 2px #141414; */
+    border-radius: 5px;
+    width: 80vw;
+    gap: 20px;
+
+    .RestaurantTypeBox {
+      position: relative; 
+      width: 100%;
+      /* border: solid 2px #141414; */
+      color: #141414;
+      height: 120px;
+      
+
+      img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transition:  all 0.8s ease;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.2)
+        }
+      }
+    }
+  }
+
 }
+
 
 #MainPageSection {
   grid-area: main;
@@ -217,16 +254,15 @@ a {
 /*--------------------------------- General Picture Rules ---------------------------------*/
 
 #bild {
-  grid-area: bild;
+  grid-area: Bild;
   width: 100%;
-  aspect-ratio: 1814/681;
-  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
   opacity: 1;
   transition: opacity 1.5s ease-in-out;
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
 
 .fade-img {
-  grid-area: bild;
+  grid-area: Bild;
   width: 100%;
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
