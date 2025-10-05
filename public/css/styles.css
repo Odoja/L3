@@ -4,7 +4,6 @@
   margin: 0;
   padding: 0;
   word-spacing: 3px;
-  color: white;
   box-sizing: border-box;
 }
 
@@ -16,15 +15,12 @@ body {
   display: grid;
   font-size: 1.125rem;
   grid-template-columns: 1fr;
-  grid-template-rows: 6vw 1fr auto auto min-content;
+  grid-template-rows: 1fr auto min-content;
   grid-template-areas:
-    " Header "
     " Bild "
-    " Nav "
-    " main "
-    "footer ";
+    " Main "
+    "Footer ";
 }
-
 
 /*--------------------------------- Headlines ---------------------------------*/
 
@@ -62,63 +58,86 @@ a {
   font-weight: 100;
 }
 
-.size {
-  font-size: 1.25rem;
-  margin: 2.5rem auto;
-  padding: 0 4.5rem 0 4.5rem;
-  line-height: 1.5;
-}
-
 .introductionText {
   left: 0;
   max-width: 60%;
   line-height: 1.5;
 }
 
-#LocalNavSection {
-  grid-area: Nav;
-  margin: 15px 0px;
-  display: flex;
-  justify-content: center;
+#MainPageSection {
+  grid-area: Main;
+  z-index: 5;
 
-  #RestaurantTypes {
+  #RestaurantTypeSection {
+    margin: 5px 0px;
     display: flex;
-    color: #141414;
     justify-content: center;
-    /* border: solid 2px #141414; */
-    border-radius: 5px;
-    width: 80vw;
-    gap: 20px;
 
-    .RestaurantTypeBox {
-      position: relative; 
-      width: 100%;
-      /* border: solid 2px #141414; */
+    #RestaurantTypes {
+      display: flex;
       color: #141414;
-      height: 120px;
-      
+      justify-content: center;
+      border-radius: 5px;
+      width: 80vw;
+      gap: 20px;
 
-      img {
+      .RestaurantTypeBox {
         position: relative;
         width: 100%;
-        height: 100%;
-        object-fit: contain;
-        transition:  all 0.8s ease;
-        cursor: pointer;
+        color: #141414;
+        height: 120px;
 
-        &:hover {
-          transform: scale(1.2)
+
+        img {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          transition: all 0.8s ease;
+          cursor: pointer;
+
+          &:hover {
+            transform: scale(1.2)
+          }
         }
       }
     }
+
   }
 
-}
+  #SortingSection {
+    margin: 15px 0px;
+    display: flex;
+    justify-content: center;
 
+    .SortingOptions {
+      display: flex;
+      width: 80vw;
+      gap: 3px;
+    }
 
-#MainPageSection {
-  grid-area: main;
-  z-index: 5;
+    .Sort-btn {
+      width: 10%;
+      padding: 0.7rem;
+      margin: 10px;
+      font-size: 1.25rem;
+      color: rgb(255, 255, 255);
+      border: none;
+      background-color: rgb(194, 12, 12);
+      border-radius: 15px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .Sort-btn.active {
+      background-color: rgb(84, 84, 84);
+    }
+
+    .Sort-btn:hover {
+      background-color: rgb(170, 11, 11);
+      transition: ease 0.3s;
+    }
+  }
 }
 
 .DarkSection {
@@ -257,15 +276,49 @@ a {
   grid-area: Bild;
   width: 100%;
   opacity: 1;
-  transition: opacity 1.5s ease-in-out;
-  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  transition: transform 4s ease-in-out;
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
 }
 
-.fade-img {
+.image-container {
+  position: relative;
   grid-area: Bild;
-  width: 100%;
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out;
+  overflow: hidden;
+
+  #HeadPicText {
+    color: #FFF8DC;
+    z-index: 100;
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    h2 {
+      color: inherit;
+      font-family: 'Georgia', 'Garamond', serif;
+      font-style: italic;
+      font-size: 6rem;
+      text-shadow:
+        0 0 8px rgba(0, 0, 0, 0.5),
+        2px 2px 6px rgba(0, 0, 0, 0.6);
+      width: max-content;
+      z-index: 100;
+    }
+
+    p {
+      color: inherit;
+      font-size: 1.5rem;
+      font-style: italic;
+      text-align: center;
+      text-shadow:
+        0 0 8px rgba(0, 0, 0, 0.5),
+        2px 2px 6px rgba(0, 0, 0, 0.6);
+      margin: 20px auto;
+      width: 80%;
+      z-index: 100;
+    }
+
+  }
 }
 
 .NavPicBox {
@@ -348,7 +401,7 @@ a {
 /*--------------------------------- Footer ---------------------------------*/
 
 footer {
-  grid-area: footer;
+  grid-area: Footer;
   background-color: #333;
   padding: 20px 0;
   color: white;
