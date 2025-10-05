@@ -1,0 +1,59 @@
+.DarkSection {
+  position: relative;
+  background-color: #141414;
+  color: #ffffff;
+  padding: 2% 9.5% 5% 9.5%;
+}
+
+.DarkSectionHalf {
+  position: relative;
+  background: linear-gradient(to bottom, #ffffff 50%, #141414 50%);
+  color: #ffffff;
+  padding: 2% 9.5% 5% 9.5%;
+}
+
+.LightSection {
+  position: relative;
+  background-color: #ffffff;
+  color: #141414;
+  padding: 2% 3.5% 5% 3.5%;
+}
+
+.LightSectionHalf {
+  position: relative;
+  background: linear-gradient(to bottom, #141414 50%, #ffffff 50%);
+  color: #141414;
+  padding: 2% 9.5% 5% 9.5%;
+}
+
+.DarkBackground {
+  position: absolute;
+  inset: 0;
+  background-color: #202020;
+  clip-path: polygon(0 0, 100% 50%, 100% 100%, 0% 50%);
+  z-index: 0;
+}
+
+.DarkHalfBackground {
+  position: absolute;
+  inset: 0;
+  background-color: #202020;
+  clip-path: polygon(0 0, 100% 50%, 100% 50%, 0% 50%);
+  z-index: 0;
+}
+
+.LightBackground {
+  position: absolute;
+  inset: 0;
+  background-color: antiquewhite;
+  clip-path: polygon(0 0, 100% 50%, 100% 100%, 0% 50%);
+  z-index: 0;
+}
+
+.LightHalfBackground {
+  position: absolute;
+  inset: 0;
+  background-color: antiquewhite;
+  clip-path: polygon(0 50%, 100% 50%, 100% 100%);
+  z-index: 0;
+}

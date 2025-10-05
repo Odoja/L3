@@ -1,0 +1,19 @@
+footer {
+  grid-area: Footer;
+  background-color: #333;
+  padding: 20px 0;
+  color: white;
+  font-size: 0.875rem;
+
+  .footer-container {
+    display: flex;
+    max-width: 1200px;
+    min-height: 100px;
+    margin: auto;
+  }
+
+  .footer-section {
+    margin: auto;
+  }
+
+}

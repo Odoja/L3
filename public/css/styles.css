@@ -1,4 +1,6 @@
-/*style*/
+@import url(./sections.css);
+@import url(./headlines.css);
+@import url(./footer.css);
 
 * {
   margin: 0;
@@ -22,28 +24,6 @@ body {
     "Footer ";
 }
 
-/*--------------------------------- Headlines ---------------------------------*/
-
-h1 {
-  font-size: 2.75rem;
-  margin-top: 0;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-}
-
-h2 {
-  font-size: 2.05rem;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-}
-
-h3 {
-  font-size: 1.7rem;
-  margin: 0;
-}
-
-h4 {
-  margin: 0;
-}
-
 /*--------------------------------- Href ---------------------------------*/
 
 a {
@@ -51,17 +31,11 @@ a {
   text-decoration: none;
 }
 
-/*--------------------------------- Sections ---------------------------------*/
+/*--------------------------------- Main Page Section ---------------------------------*/
 
 .SectionStyle {
   width: 100%;
   font-weight: 100;
-}
-
-.introductionText {
-  left: 0;
-  max-width: 60%;
-  line-height: 1.5;
 }
 
 #MainPageSection {
@@ -142,69 +116,9 @@ a {
   }
 }
 
-.DarkSection {
-  position: relative;
-  background-color: #141414;
-  color: #ffffff;
-  padding: 2% 9.5% 5% 9.5%;
-}
+/*--------------------------------- Picture Section/Row/Container ---------------------------------*/
 
-.DarkSectionHalf {
-  position: relative;
-  background: linear-gradient(to bottom, #ffffff 50%, #141414 50%);
-  color: #ffffff;
-  padding: 2% 9.5% 5% 9.5%;
-}
-
-.LightSection {
-  position: relative;
-  background-color: #ffffff;
-  color: #141414;
-  padding: 2% 3.5% 5% 3.5%;
-}
-
-.LightSectionHalf {
-  position: relative;
-  background: linear-gradient(to bottom, #141414 50%, #ffffff 50%);
-  color: #141414;
-  padding: 2% 9.5% 5% 9.5%;
-}
-
-.DarkBackground {
-  position: absolute;
-  inset: 0;
-  background-color: #202020;
-  clip-path: polygon(0 0, 100% 50%, 100% 100%, 0% 50%);
-  z-index: 0;
-}
-
-.DarkHalfBackground {
-  position: absolute;
-  inset: 0;
-  background-color: #202020;
-  clip-path: polygon(0 0, 100% 50%, 100% 50%, 0% 50%);
-  z-index: 0;
-}
-
-.LightBackground {
-  position: absolute;
-  inset: 0;
-  background-color: antiquewhite;
-  clip-path: polygon(0 0, 100% 50%, 100% 100%, 0% 50%);
-  z-index: 0;
-}
-
-.LightHalfBackground {
-  position: absolute;
-  inset: 0;
-  background-color: antiquewhite;
-  clip-path: polygon(0 50%, 100% 50%, 100% 100%);
-  z-index: 0;
-}
-
-/*------------------ Picture Section -------------------*/
-
-.RestaruantPictureSection {
+.RestaurantPictureSection {
   position: relative;
   left: 0;
 
@@ -212,6 +126,12 @@ a {
     display: flex;
     flex-direction: column;
     padding: 10px;
+
+    .Cuisine-Text {
+      left: 0;
+      max-width: 60%;
+      line-height: 1.5;
+    }
   }
 }
 
@@ -261,13 +181,7 @@ a {
   }
 }
 
-.Light-Header-Text {
-  display: flex;
-  flex-direction: column;
-  color: white;
-}
-
-/*--------------------------------- General Picture Rules ---------------------------------*/
+/*--------------------------------- Main Image ---------------------------------*/
 
 .MainImageWrapper {
   position: relative;
@@ -318,7 +232,9 @@ a {
   }
 }
 
-.MainPagePicRowBox {
+/*--------------------------------- Pictures ---------------------------------*/
+
+.RestaurantPicBox {
   position: relative;
   overflow: hidden;
   height: 360px;
@@ -326,7 +242,7 @@ a {
   flex: 0 0 auto;
 }
 
-.MainPagePicRowBox::before {
+.RestaurantPicBox::before {
   content: "";
   position: absolute;
   top: 0;
@@ -337,28 +253,6 @@ a {
   background-size: cover;
   transition: transform 1s ease;
   z-index: 0;
-}
-
-/*--------------------------------- Footer ---------------------------------*/
-
-footer {
-  grid-area: Footer;
-  background-color: #333;
-  padding: 20px 0;
-  color: white;
-  font-size: 0.875rem;
-
-  .footer-container {
-    display: flex;
-    max-width: 1200px;
-    min-height: 100px;
-    margin: auto;
-  }
-
-  .footer-section {
-    margin: auto;
-  }
-
 }
 
 
@@ -382,13 +276,7 @@ footer {
     margin: 0;
   }
 
-  .size {
-    font-size: 1.18rem;
-    margin: 2.35rem auto;
-    line-height: 1.5;
-  }
-
-  .introductionText {
+  .Cuisine-Text {
     font-size: 1rem;
     max-width: 70%;
   }
@@ -420,13 +308,7 @@ footer {
     margin: 0;
   }
 
-  .size {
-    font-size: 1.1rem;
-    margin: 2.225rem auto;
-    line-height: 1.5;
-  }
-
-  .introductionText {
+  .Cuisine-Text {
     font-size: 0.875rem;
     max-width: 80%;
   }
