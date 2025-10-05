@@ -219,7 +219,6 @@ a {
     grid-area: Bild;
     width: 100%;
     opacity: 1;
-    transition: transform 4s ease-in-out;
     mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
   }
 
@@ -302,68 +301,4 @@ a {
   background-size: cover;
   transition: transform 1s ease;
   z-index: 0;
-}
-
-
-/*--------------------------------- 1440px Screen ---------------------------------*/
-
-@media (max-width: 1441px) {
-  body {
-    font-size: 1.06rem;
-  }
-
-  h1 {
-    font-size: 2.585rem;
-  }
-
-  h2 {
-    font-size: 1.76rem;
-  }
-
-  h3 {
-    font-size: 1.41rem;
-    margin: 0;
-  }
-
-  .Cuisine-Text {
-    font-size: 1rem;
-    max-width: 70%;
-  }
-
-  .MainPagePicRowBox {
-    width: 263px;
-    height: 270px;
-  }
-
-}
-
-/*--------------------------------- 1024px Screen ---------------------------------*/
-
-@media (max-width: 1025px) {
-  body {
-    font-size: 1rem;
-  }
-
-  h1 {
-    font-size: 2.45rem;
-  }
-
-  h2 {
-    font-size: 1.67rem;
-  }
-
-  h3 {
-    font-size: 1.335rem;
-    margin: 0;
-  }
-
-  .Cuisine-Text {
-    font-size: 0.875rem;
-    max-width: 80%;
-  }
-
-  .MainPagePicRowBox {
-    width: 187px;
-    height: 192px;
-  }
 }
