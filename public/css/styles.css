@@ -163,21 +163,18 @@ a {
 }
 
 .PictureRow {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   padding: 20px 10px;
-  overflow-x: auto;
 
   .PicWrapper {
     box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
     display: flex;
-    width: min-content;
     flex-direction: column;
 
     .RestaurantPicDescription {
       padding: 10px;
-      border-top: solid 1px black;
 
       .info {
         padding: 5px 0;
@@ -283,22 +280,10 @@ a {
 /*--------------------------------- Pictures ---------------------------------*/
 
 .RestaurantPicBox {
-  position: relative;
+  display: block;
   overflow: hidden;
   height: 360px;
-  width: 400px;
-  flex: 0 0 auto;
-}
-
-.RestaurantPicBox::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
   background-position: center;
   background-size: cover;
-  transition: transform 1s ease;
-  z-index: 0;
 }
