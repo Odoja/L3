@@ -30,7 +30,7 @@ const restaurantSchema = new mongoose.Schema({
 restaurantSchema.add(BASE_SCHEMA)
 
 
-// Virtual för snittbetyg
+// Virtual för snittbetyg, Inte min kod så ska kanske bort!
 restaurantSchema.virtual('averageRating').get(function () {
   if (this.reviews.length === 0) {
     return 0
@@ -40,5 +40,4 @@ restaurantSchema.virtual('averageRating').get(function () {
   }
 })
 
-// Tredje argumentet 'Restaurants' pekar på din exakta collection i MongoDB
 export const RestaurantModel = mongoose.model('Restaurants', restaurantSchema)

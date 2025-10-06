@@ -46,7 +46,7 @@ a {
 #RestaurantTypeSection {
   position: relative;
   display: flex;
-  top: -6%;
+  top: -80px;
   flex-direction: column;
   padding: 0 3.5% 0 3.5%;
 
@@ -94,6 +94,10 @@ a {
         object-fit: contain;
         transition: all 0.8s ease;
         cursor: pointer;
+
+        &.active {
+          transform: scale(1.2)
+        }
 
         &:hover {
           transform: scale(1.2)
