@@ -1,3 +1,5 @@
+import { RestaurantModel } from '../models/RestaurantModel.js'
+
 /**
  * Encapsulates a controller.
  */
@@ -9,8 +11,16 @@ export class HomeController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  MainIndex (req, res, next) {
-    res.render('Huvudsida/index')
-  }
+  async MainIndex (req, res, next) {
+  try {
+    const restaurantData = (await RestaurantModel.find())
+      .map(restaurant => restaurant.toObject())
 
+      // console.log(restaurantData)
+        
+      res.render('Huvudsida/index', { restaurantData })
+    } catch (error) {
+      next(error)
+    }
+  }
 }

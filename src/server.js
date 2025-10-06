@@ -2,9 +2,13 @@ import express from 'express'
 import expressLayouts from 'express-ejs-layouts'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { connectToDatabase } from './config/mongoose.js'
 import { router } from './routes/router.js'
 
 try {
+  // Connect to MongoDB.
+  await connectToDatabase(process.env.DB_CONNECTION_STRING)
+
   // Creates an Express application.
   const app = express()
 
@@ -18,20 +22,12 @@ try {
   app.set('view engine', 'ejs')
   app.set('views', join(directoryFullName, 'views'))
   app.set('layout', join(directoryFullName, 'views', 'layouts', 'default'))
-  app.set('layout extractScripts', true)
-  app.set('layout extractStyles', true)
   app.use(expressLayouts)
 
-  // Parse requests of the content type application/x-www-form-urlencoded.
-  // Populates the request object with a body object (req.body).
+  // Middleware
   app.use(express.urlencoded({ extended: false }))
   app.use(express.json())
-  // --------------------------------------------------------------------------
-
-  // Serve static files.
   app.use(express.static(join(directoryFullName, '..', 'public')))
-
-  // Middleware to be executed before the routes.
   app.use((req, res, next) => {
     res.locals.baseURL = baseURL
     next()
@@ -40,30 +36,18 @@ try {
   // Register routes.
   app.use('/', router)
 
-  // Error handler.
   app.use((err, req, res, next) => {
     console.error(err.message, { error: err })
 
-    // 404 Not Found.
     if (err.status === 404) {
-      res
-        .status(404)
-        .sendFile(join(directoryFullName, 'views', 'errors', '404.html'))
-      return
+      return res.status(404).sendFile(join(directoryFullName, 'views', 'errors', '404.html'))
     }
 
-    // 500 Internal Server Error (in production, all other errors send this response).
     if (process.env.NODE_ENV === 'production') {
-      res
-        .status(500)
-        .sendFile(join(directoryFullName, 'views', 'errors', '500.html'))
-      return
+      return res.status(500).sendFile(join(directoryFullName, 'views', 'errors', '500.html'))
     }
 
-    // Render the error page.
-    res
-      .status(err.status || 500)
-      .render('errors/error', { error: err })
+    res.status(err.status || 500).render('errors/error', { error: err })
   })
 
   // Starts the HTTP server listening for connections.
