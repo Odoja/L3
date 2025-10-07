@@ -1,4 +1,6 @@
-import { ReviewRenderer } from './renderReview.js'
+import { ReviewFetcher } from './Review-Fetcher.js'
+import { ReviewRenderer } from './Review-Renderer.js'
+import { ReviewSorter } from './Review-Sorter.js'
 
 const template = document.createElement('template')
 template.innerHTML = `
@@ -34,7 +36,7 @@ template.innerHTML = `
       </div>
     </form>
     <div id="review-wrapper"> 
-      <select name="" id="filter-option" class="hidden">
+      <select name="" id="sort-option" class="hidden">
         <option value="Newest">Newest Reviews</option>
         <option value="Oldest">Oldest Reviews</option>
         <option value="Top-rated">Highest Rating</option>
@@ -60,6 +62,8 @@ customElements.define('review-component',
       this.stars = this.shadowRoot.querySelectorAll('.star')
       this.ratingInput = this.shadowRoot.querySelector('#rating')
       this.reviewRenderer = new ReviewRenderer(this.shadowRoot)
+      this.reviewSorter = new ReviewSorter(this.shadowRoot)
+      this.reviewFetcher = new ReviewFetcher(this.shadowRoot)
     }
 
     /**
@@ -69,7 +73,7 @@ customElements.define('review-component',
       this.ratingSetup()
       this.displayReviews()
       this.formLogic()
-      this.filterSetup()
+      this.reviewSorter.sortSetup()
     }
 
     /**
@@ -126,8 +130,8 @@ customElements.define('review-component',
      */
     async displayReviews () {
       try {
-        const reviews = await this.fetchReviews()
-        this.displaySortOptions(reviews)
+        const reviews = await this.reviewFetcher.fetchReviews()
+        this.reviewSorter.displaySortOptions(reviews)
         this.reviewRenderer.renderReviews(reviews)
       } catch (err) {
         console.error(err)
@@ -175,84 +179,6 @@ customElements.define('review-component',
           console.error(error)
         }
       })
-    }
-
-    /**
-     * Setups the event listeners for option filter.
-     */
-    filterSetup () {
-      const filterOption = this.shadowRoot.getElementById('filter-option')
-      filterOption.addEventListener('change', (e) => {
-        this.reviewFilter(e.target.value)
-      })
-    }
-
-    /**
-     * Sorting logic for the reviews.
-     *
-     * @param {string} filterOption - the filter the code is going to sort by.
-     */
-    async reviewFilter (filterOption) {
-      try {
-        const reviews = await this.fetchReviews()
-
-        this.displaySortOptions(reviews)
-
-        switch (filterOption) {
-          case 'Newest':
-            reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-            break
-          case 'Oldest':
-            reviews.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
-            break
-          case 'Top-rated':
-            reviews.sort((a, b) => b.rating - a.rating)
-            break
-          case 'Lowest-rated':
-            reviews.sort((a, b) => a.rating - b.rating)
-            break
-          default:
-            break
-        }
-
-        this.reviewRenderer.renderReviews(reviews)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    /**
-     * Displays the sorting for reviews depending if there are reviews to be shown or not.
-     *
-     * @param {*} reviews - a list with reviews.
-     */
-    displaySortOptions (reviews) {
-      const sortList = this.shadowRoot.getElementById('filter-option')
-
-      if (!reviews || reviews.length === 0) {
-        sortList.classList.add('hidden')
-      } else {
-        sortList.classList.remove('hidden')
-      }
-    }
-
-    /**
-     * Fetches reviws from the databas.
-     *
-     * @returns {Promise<Array>} - Array of review objects.
-     */
-    async fetchReviews () {
-      try {
-        const res = await fetch('/review/all') // fill in your own fetch route
-
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`)
-        }
-
-        return await res.json()
-      } catch (err) {
-        console.error(err)
-      }
     }
   }
 )
