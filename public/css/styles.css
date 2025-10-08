@@ -96,11 +96,11 @@ a {
         cursor: pointer;
 
         &.active {
-          transform: scale(1.2)
+          transform: scale(1.15);
         }
 
         &:hover {
-          transform: scale(1.2)
+          transform: scale(1.15);
         }
       }
     }
@@ -138,6 +138,7 @@ a {
   }
 
   .Sort-btn.active {
+    color: #ffffff;
     background-color: rgb(62, 62, 62);
   }
 
@@ -205,6 +206,10 @@ a {
         .AmountOfRating {}
 
       }
+    }
+    
+    &.hidden {
+      display: none;
     }
   }
 }
@@ -286,7 +291,7 @@ a {
 .RestaurantPicBox {
   display: block;
   overflow: hidden;
-  height: 360px;
+  height: 300px;
   width: 100%;
   background-position: center;
   background-size: cover;
