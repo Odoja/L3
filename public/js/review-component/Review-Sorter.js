@@ -16,14 +16,13 @@ export class ReviewSorter {
     this.reviewRenderer = new ReviewRenderer(this.shadowRoot)
   }
 
-
   /**
- * Setups the event listeners for sorting.
- */
+   * Setups the event listeners for sorting.
+   */
   sortSetup() {
     const sortOption = this.shadowRoot.getElementById('sort-option')
-    sortOption.addEventListener('change', (e) => {
-      this.reviewSorting(e.target.value)
+    sortOption.addEventListener('change', (event) => {
+      this.reviewSorting(event.target.value)
     })
   }
 
@@ -37,23 +36,7 @@ export class ReviewSorter {
       const reviews = await this.reviewFetcher.fetchReviews()
 
       this.displaySortOptions(reviews)
-
-      switch (sortOption) {
-        case 'Newest':
-          reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-          break
-        case 'Oldest':
-          reviews.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
-          break
-        case 'Top-rated':
-          reviews.sort((a, b) => b.rating - a.rating)
-          break
-        case 'Lowest-rated':
-          reviews.sort((a, b) => a.rating - b.rating)
-          break
-        default:
-          break
-      }
+      this.sortReviewsByOption(reviews, sortOption)
 
       this.reviewRenderer.renderReviews(reviews)
     } catch (error) {
@@ -76,6 +59,28 @@ export class ReviewSorter {
     }
   }
 
-  // Helper methods
-
+  /**
+   * Sorts reviews array based on the selected sorting option.
+   *
+   * @param {Array} reviews - the array of reviews to sort.
+   * @param {string} sortOption - the sorting option.
+   */
+  sortReviewsByOption(reviews, sortOption) {
+    switch (sortOption) {
+      case 'Newest':
+        reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        break
+      case 'Oldest':
+        reviews.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+        break
+      case 'Top-rated':
+        reviews.sort((a, b) => b.rating - a.rating)
+        break
+      case 'Lowest-rated':
+        reviews.sort((a, b) => a.rating - b.rating)
+        break
+      default:
+        break
+    }
+  }
 }
