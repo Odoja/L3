@@ -1,0 +1,16 @@
+.RestaurantImageWrapper {
+  position: relative;
+  grid-area: Bild;
+  overflow: hidden;
+  height: 600px;
+  width: 1300px;
+  margin: auto;
+
+  #MainImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-bottom: 1px rgb(65, 65, 65) solid;
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  }
+}

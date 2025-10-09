@@ -1,0 +1,41 @@
+<div class="RestaurantImageWrapper">
+  <img src="<%= restaurantData.image %>" alt="<%= restaurantData.name %>" id="MainImage" class="RestaurantImage">
+</div>
+
+<section id="MainPageSection" class="SectionStyle">
+
+  <div>
+    <div>
+      <div>
+        <h1>
+          <%= restaurantData.name %>
+        </h1>
+        <p class="RestaurantType">
+          <%= restaurantData.type %>
+        </p>
+        <p class="RestaurantPrice">
+          <%= restaurantData.price %>
+        </p>
+        <div class="RatingBox">
+          <span class="Rating">
+            <%= restaurantData.averageRating %>⭐
+          </span>
+          <span class="AmountOfRating">(<%= restaurantData.reviews.length %> recensioner)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="RestaurantDetails">
+      <p>
+        <%= restaurantData.description %>
+      </p>
+    </div>
+
+    <div class="Reviews">
+      <review-component></review-component>
+    </div>
+  </div>
+
+
+
+</section>
