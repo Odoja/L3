@@ -15,10 +15,10 @@
   <section id="RestaurantTypeSection">
     <h2 id="TypesHeader">Types of Kitchens:</h2>
     <div id="RestaurantTypes">
-      <div class="RestaurantTypeBox"><img class="emblem" src="./img/emblems/Restaurang.png"  alt="icon" data-pref="All">
+      <div class="RestaurantTypeBox"><img class="emblem" src="./img/emblems/Restaurang.png" alt="icon" data-pref="All">
         <p class="emblem-text">Restaurants</p>
       </div>
-      <div class="RestaurantTypeBox"><img class="emblem" src="./img/emblems/Svensk.png"  alt="icon" data-pref="Swedish">
+      <div class="RestaurantTypeBox"><img class="emblem" src="./img/emblems/Svensk.png" alt="icon" data-pref="Swedish">
         <p class="emblem-text">Swedish</p>
       </div>
       <div class="RestaurantTypeBox"><img class="emblem" src="./img/emblems/Italiensk.png" alt="icon" data-pref="Italian">
@@ -71,12 +71,12 @@
                 <div class="info">
                   <span class="RestaurantName">
                     <%= restaurant.name %>
+                    <span class="RestaurantPrice">
+                        <%= restaurant.price %>
+                      </span>
                   </span>
                   <span class="RestaurantType">
                     <%= restaurant.type %>
-                  </span>
-                  <span class="RestaurantPrice">
-                    <%= restaurant.price %>
                   </span>
                 </div>
                 <div class="RatingBox">

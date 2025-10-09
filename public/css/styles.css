@@ -9,13 +9,17 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 100%;
+}
+
 /*--------------------------------- Index ---------------------------------*/
 
 body {
   background-color: #ffffff;
   font-family: "segoe UI", sans-serif, Verdana, "Geneva";
   display: grid;
-  font-size: 1.125rem;
+  font-size: 1rem;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr auto min-content;
   grid-template-areas:
@@ -79,7 +83,6 @@ a {
       .emblem-text {
         position: relative;
         color: rgb(62, 62, 62);
-        font-size: clamp(0.2rem, 2vw, 1.2rem);
         font-weight: 500;
         margin: 20px 0;
         text-align: center;
@@ -174,14 +177,18 @@ a {
 
   .PicWrapper {
     box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
+    height: 330px;
     display: flex;
     flex-direction: column;
 
     .RestaurantPicDescription {
-      padding: 10px;
+      padding: 0.2rem 0.7rem 0.7rem 0.7rem;
 
       .info {
         padding: 5px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
 
         .RestaurantName {
           font-size: 1.3rem;
@@ -195,6 +202,7 @@ a {
 
         .RestaurantPrice {
           font-style: italic;
+          font-weight: 200;
         }
       }
 
@@ -206,7 +214,7 @@ a {
 
       }
     }
-    
+
     &.hidden {
       display: none;
     }
@@ -250,7 +258,7 @@ a {
       outline: none;
       background-color: rgba(255, 255, 255, 1);
       box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
-      
+
     }
 
     .search-input::placeholder {
@@ -290,8 +298,66 @@ a {
 .RestaurantPicBox {
   display: block;
   overflow: hidden;
-  height: 300px;
+  height: 100%;
   width: 100%;
   background-position: center;
   background-size: cover;
+}
+
+/*--------------------------------- Queries ---------------------------------*/
+
+@media (max-width: 1200px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+@media (max-width: 1025px) {
+  html {
+    font-size: 70%;
+  }
+
+  .PictureRow {
+
+    .PicWrapper {
+      height: 220px;
+
+      .RestaurantPicDescription {
+        padding: 0.2rem 0.7rem 0.7rem 0.7rem;
+      }
+    }
+
+  }
+}
+
+@media (max-width: 769px) {
+  html {
+    font-size: 60%;
+  }
+
+  .PictureRow {
+    
+  grid-template-columns: repeat(3, 1fr);
+
+    .PicWrapper {
+      height: 200px;
+
+      .RestaurantPicDescription {
+
+        .info {
+
+          .RestaurantName {
+            font-size: 1.1rem;
+          }
+
+          .RestaurantType {
+            font-size: 0.9rem;
+          }
+        }
+      }
+
+
+    }
+  }
+
 }
