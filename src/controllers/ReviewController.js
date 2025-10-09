@@ -1,50 +1,30 @@
 import { ReviewModel } from '../models/ReviewModel.js'
+import { RestaurantModel } from '../models/RestaurantModel.js'
 
 /**
  * Encapsulates a controller.
  */
 export class ReviewController {
-  /**
-   * Provide req.doc to the route if :id is present.
-   *
-   * @param {object} req - Express request object.
-   * @param {object} res - Express response object.
-   * @param {Function} next - Express next middleware function.
-   * @param {string} id - The value of the id for the post to load.
-   */
-  async loadPostDocument (req, res, next, id) {
-    try {
-      // Get the post document.
-      const postDoc = await ReviewModel.findById(id)
-
-      // If the post document is not found, throw an error.
-      if (!postDoc) {
-        const error = new Error('The post you requested does not exist.')
-        error.status = 404
-        throw error
-      }
-
-      // Provide the post document to req.
-      req.doc = postDoc
-
-      // Next middleware.
-      next()
-    } catch (error) {
-      next(error)
-    }
-  }
 
   /**
-   * Displays a list of all posts.
+   * Displays reviews for a specific restaurant.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  async index (req, res, next) {
+ async restaurantReviews(req, res, next) {
     try {
-      const posts = await ReviewModel.find().sort({ createdAt: -1 })
-      res.json(posts)
+      const restaurantId = req.params.id
+      // console.log('ID:' + restaurantId)
+
+      const restaurant = await RestaurantModel.findById(
+        restaurantId,
+        { reviews: 1 }
+      )
+
+      console.log(restaurant)
+      res.json(restaurant.reviews)
     } catch (error) {
       next(error)
     }

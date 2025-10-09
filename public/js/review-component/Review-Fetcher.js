@@ -9,6 +9,11 @@ export class ReviewFetcher {
    */
   constructor(shadowRoot) {
     this.shadowRoot = shadowRoot
+    this.restaurantId = this.getRestaurantId()
+  }
+
+  getRestaurantId() {
+    return window.location.pathname.split('/').pop()
   }
 
   /**
@@ -18,7 +23,8 @@ export class ReviewFetcher {
  */
   async fetchReviews() {
     try {
-      const res = await fetch('/review/all') // fill in your own fetch route
+      const res = await fetch(`/review/restaurant/${this.restaurantId}`) // fill in your own fetch route
+      console.log(res)
 
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`)
