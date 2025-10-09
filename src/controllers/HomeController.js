@@ -23,4 +23,18 @@ export class HomeController {
       next(error)
     }
   }
+
+  async RestaurantPage (req, res, next) {
+    try {
+      const restaurantId = req.params.id
+      
+      const restaurantData = await RestaurantModel.findById(restaurantId)
+
+      // console.log(restaurantData)
+
+      res.render('Restaurangsida/index', { restaurantData })
+    } catch (error) {
+      next(error)
+    }
+  }
 }
