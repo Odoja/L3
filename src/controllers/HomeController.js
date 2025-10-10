@@ -27,7 +27,6 @@ export class HomeController {
   async RestaurantPage (req, res, next) {
     try {
       const restaurantId = req.params.id
-      
       const restaurantData = await RestaurantModel.findById(restaurantId)
 
       // console.log(restaurantData)

@@ -22,8 +22,9 @@ body {
   display: grid;
   font-size: 1rem;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr auto min-content;
+  grid-template-rows: min-content 1fr auto min-content;
   grid-template-areas:
+    " Gnav "
     " Bild "
     " Main "
     "Footer ";
@@ -177,27 +178,26 @@ a {
 
   .PicWrapper {
     box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
-    height: 330px;
+    height: 19vw;
     display: flex;
     flex-direction: column;
 
     .RestaurantPicDescription {
       padding: 0.2rem 0.7rem 0.7rem 0.7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
 
       .info {
-        padding: 5px 0;
+        padding: 0.1rem 0;
         display: flex;
         flex-direction: column;
         gap: 4px;
 
-        .RestaurantName {
-          font-size: 1.3rem;
-          font-weight: bold;
-        }
+        .RestaurantName {}
 
         .RestaurantType {
           font-style: italic;
-          font-size: 1rem;
         }
 
         .RestaurantPrice {
@@ -317,13 +317,10 @@ a {
   }
 
   .PictureRow {
+    grid-template-columns: repeat(3, 1fr);
 
     .PicWrapper {
-      height: 220px;
-
-      .RestaurantPicDescription {
-        padding: 0.2rem 0.7rem 0.7rem 0.7rem;
-      }
+      height: 25vw;
     }
 
   }
@@ -336,26 +333,8 @@ a {
 
   .PictureRow {
 
-    grid-template-columns: repeat(3, 1fr);
-
     .PicWrapper {
-      height: 200px;
-
-      .RestaurantPicDescription {
-
-        .info {
-
-          .RestaurantName {
-            font-size: 1.1rem;
-          }
-
-          .RestaurantType {
-            font-size: 0.9rem;
-          }
-        }
-      }
-
-
+      height: 25vw;
     }
   }
 
