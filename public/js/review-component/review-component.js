@@ -37,7 +37,7 @@ template.innerHTML = `
     </form>
     <div id="review-wrapper"> 
       <select name="" id="sort-option" class="hidden">
-        <option value="Newest">Newest Reviews</option>
+        <option value="Newest" selected>Newest Reviews</option>
         <option value="Oldest">Oldest Reviews</option>
         <option value="Top-rated">Highest Rating</option>
         <option value="Lowest-rated">Lowest Rating</option>
@@ -132,6 +132,7 @@ customElements.define('review-component',
       try {
         const reviews = await this.reviewFetcher.fetchReviews()
         this.reviewSorter.displaySortOptions(reviews)
+        this.reviewSorter.sortReviewsByOption(reviews, 'Newest')
         this.reviewRenderer.renderReviews(reviews)
       } catch (err) {
         console.error(err)
@@ -164,7 +165,8 @@ customElements.define('review-component',
             body: JSON.stringify({
               username: username.trim(),
               review: review.trim(),
-              rating
+              rating,
+              restaurantId: this.reviewFetcher.restaurantId
             })
           })
 

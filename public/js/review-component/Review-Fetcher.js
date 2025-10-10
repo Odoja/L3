@@ -35,5 +35,4 @@ export class ReviewFetcher {
       console.error(err)
     }
   }
-
 }

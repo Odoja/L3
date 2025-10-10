@@ -107,9 +107,8 @@
     flex-direction: column;
     margin-top: 40px;
     gap: 30px;
-    height: 500px;
-    overflow: scroll;
-    scrollbar-width: none;
+    height: 680px;
+    overflow-y: scroll;
 
     .review-container {
       display: flex;
