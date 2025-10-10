@@ -8,7 +8,6 @@
     grid-template-columns: 20% 60% 20%;
     padding: 1rem 1.5rem;
     min-height: 5vw;
-    color: #333;
 
     h1 {
       display: flex;
@@ -16,6 +15,7 @@
       align-items: center;
       font-family: 'Georgia', 'Garamond', serif;
       font-style: italic;
+      color: #202020;
     }
   }
 }
@@ -46,7 +46,6 @@
   }
 }
 
-
 .RestaurantImageWrapper {
   position: relative;
   grid-area: Bild;
@@ -55,10 +54,75 @@
   width: 72vw;
   margin: auto;
 
-  #MainImage {
+  #MainImage2 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
   }
+}
+
+#RestaurantContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem;
+}
+
+.RestaurantTopSection {
+  display: flex;
+  justify-content: space-between;
+  color: #202020;
+
+  .RestaurantHeader {
+    font-family: 'Georgia', 'Garamond', serif;
+    margin: 0.7rem 0;
+  }
+
+  .RestaurantType {
+    font-style: italic;
+    font-size: 1.2rem;
+    font-weight: 100;
+  }
+
+  .RatingBox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .Rating {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #333;
+    }
+  }
+}
+
+.Divider {
+  border: none;
+  border-top: 2px solid #e0e0e0;
+  margin: 2.5rem 0;
+}
+
+.RestaurantDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: #282828;
+
+  .DetailsHeader {
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .Description {
+    width: 75%;
+    font-weight: 400;
+    letter-spacing: 0.05rem;
+    word-spacing: 7px;
+    line-height: 1.7rem;
+  }
+}
+
+.Reviews {
+  margin-top: 150px;
 }

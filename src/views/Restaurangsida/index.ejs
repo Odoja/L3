@@ -11,23 +11,21 @@
 </header>
 
 <div class="RestaurantImageWrapper">
-  <img src="<%= restaurantData.image %>" alt="<%= restaurantData.name %>" id="MainImage" class="RestaurantImage">
+  <img src="<%= restaurantData.image %>" alt="<%= restaurantData.name %>" id="MainImage2" class="RestaurantImage">
 </div>
 
 <section id="MainPageSection" class="SectionStyle">
+    <div id="RestaurantContainer">
 
-  <div>
-    <div>
-      <div>
-        <h1>
-          <%= restaurantData.name %>
-        </h1>
-        <p class="RestaurantType">
-          <%= restaurantData.type %>
-        </p>
-        <p class="RestaurantPrice">
-          <%= restaurantData.price %>
-        </p>
+      <div class="RestaurantTopSection">
+        <div>
+          <h1 class="RestaurantHeader">
+            <%= restaurantData.name %>
+            <span class="RestaurantType">
+            <%= restaurantData.type %>
+          </span>
+          </h1>
+        </div>
         <div class="RatingBox">
           <span class="Rating">
             <%= restaurantData.averageRating %>⭐
@@ -35,19 +33,19 @@
           <span class="AmountOfRating">(<%= restaurantData.reviews.length %> recensioner)</span>
         </div>
       </div>
+
+      <hr class="Divider">
+
+      <div class="RestaurantDetails">
+        <h3 class="DetailsHeader">About The Restaurant</h3>
+        <p class="Description">
+          <%= restaurantData.description %>
+        </p>
+      </div>
+
+      <div class="Reviews">
+        <review-component></review-component>
+      </div>
+
     </div>
-
-    <div class="RestaurantDetails">
-      <p>
-        <%= restaurantData.description %>
-      </p>
-    </div>
-
-    <div class="Reviews">
-      <review-component></review-component>
-    </div>
-  </div>
-
-
-
 </section>

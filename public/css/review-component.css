@@ -1,11 +1,11 @@
 .container {
   width: 800px;
   margin: auto;
-  padding: 20px;
-  font-family: "segoe UI", sans-serif, Verdana, "Geneva";
+  padding: inherit;
 
   h1 {
     margin: 20px 0 20px 5px;
+    font-weight: 500;
   }
 
   #top-section {
@@ -107,7 +107,8 @@
     flex-direction: column;
     margin-top: 40px;
     gap: 30px;
-    height: 680px;
+    height: min-content;
+    max-height: 680px;
     overflow-y: scroll;
 
     .review-container {

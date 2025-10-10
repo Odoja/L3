@@ -6,7 +6,7 @@ const template = document.createElement('template')
 template.innerHTML = `
   <link rel="stylesheet" href="./css/review-component.css">
   <div class="container">
-    <h1>Review</h1>
+    <h1>Reviews</h1>
     <form id="review-form">
       <div id="top-section">
         <input type="text" id="username" name="username" placeholder="Name" required>
