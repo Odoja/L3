@@ -1,4 +1,3 @@
-import { ReviewModel } from '../models/ReviewModel.js'
 import { RestaurantModel } from '../models/RestaurantModel.js'
 
 /**
@@ -13,7 +12,7 @@ export class ReviewController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
- async restaurantReviews(req, res, next) {
+  async restaurantReviews(req, res, next) {
     try {
       const restaurantId = req.params.id
       // console.log('ID:' + restaurantId)
@@ -23,7 +22,7 @@ export class ReviewController {
         { reviews: 1 }
       )
 
-      console.log(restaurant)
+      //console.log(restaurant)
       res.json(restaurant.reviews)
     } catch (error) {
       next(error)
@@ -36,17 +35,24 @@ export class ReviewController {
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
    */
-  async createPost (req, res) {
+  async createReview(req, res) {
     try {
-      const { username, review, rating } = req.body
+      const { username, review, rating, restaurantId } = req.body
 
-      console.log('Received data:', { username, review, rating })
+      //console.log('Received data:', { username, review, rating, restaurantId })
 
-      const newReview = await ReviewModel.create({
+      const restaurant = await RestaurantModel.findById(restaurantId)
+      restaurant.reviews.push({
         username,
         review,
         rating
       })
+      await restaurant.save()
+
+      // Send back just the newly created review
+      const newReview = restaurant.reviews[restaurant.reviews.length - 1]
+      
+      //console.log(newReview)
 
       res.status(201).json({
         success: true,

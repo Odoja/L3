@@ -26,6 +26,3 @@ export const reviewSchema = new mongoose.Schema({
 })
 
 reviewSchema.add(BASE_SCHEMA)
-
-// Create a model using the schema.
-export const ReviewModel = mongoose.model('Post', reviewSchema)

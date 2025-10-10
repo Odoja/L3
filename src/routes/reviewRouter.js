@@ -9,4 +9,4 @@ const controller = new ReviewController()
 // Map HTTP verbs and route paths to controller action methods.
 router.get('/restaurant/:id', (req, res, next) => controller.restaurantReviews(req, res, next))
 
-router.post('/create', (req, res, next) => controller.createPost(req, res, next))
+router.post('/create', (req, res, next) => controller.createReview(req, res, next))
