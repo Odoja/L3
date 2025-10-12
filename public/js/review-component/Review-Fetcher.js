@@ -5,13 +5,18 @@ export class ReviewFetcher {
   /**
    * Creates an instance of Review.
    *
-   * @param {*} shadowRoot - the shadow root of the review-component.
+   * @param {ShadowRoot} shadowRoot - the shadow root of the review-component.
    */
   constructor(shadowRoot) {
     this.shadowRoot = shadowRoot
     this.restaurantId = this.getRestaurantId()
   }
 
+  /**
+   * Gets the restaurant ID from the URL.
+   * 
+   * @returns {string} - the restaurant ID from the URL.
+   */
   getRestaurantId() {
     return window.location.pathname.split('/').pop()
   }

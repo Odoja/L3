@@ -8,7 +8,7 @@ export class ReviewSorter {
   /**
    * Creates an instance of Review.
    *
-   * @param {*} shadowRoot - the shadow root of the review-component.
+   * @param {ShadowRoot} shadowRoot - the shadow root of the review-component.
    */
   constructor(shadowRoot) {
     this.shadowRoot = shadowRoot
@@ -47,7 +47,7 @@ export class ReviewSorter {
   /**
    * Displays the sorting for reviews depending if there are reviews to be shown or not.
    *
-   * @param {*} reviews - a list with reviews.
+   * @param {Array<Object>} reviews - a list with reviews.
    */
   displaySortOptions(reviews) {
     const sortList = this.shadowRoot.getElementById('sort-option')

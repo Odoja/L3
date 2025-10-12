@@ -27,8 +27,8 @@ export class RestaurantFilter {
 
   /**
    * Handles the click event for the filter emblems.
-   * 
-   * @param {*} emblem - the clicked emblem.
+   *
+   * @param {HTMLElement} emblem - the clicked emblem.
    */
   #filterClick(emblem) {
     const cuisineType = emblem.dataset.pref
@@ -40,7 +40,7 @@ export class RestaurantFilter {
   /**
    * Adds/removes the active class on the clicked emblem.
    * 
-   * @param {*} clickedEmblem - the clicked emblem.
+   * @param {HTMLElement} clickedEmblem - the clicked emblem.
    */
   #updateFilterEmblem(clickedEmblem) {
     this.#restaurantEmblem.forEach(emblem => emblem.classList.remove('active'))

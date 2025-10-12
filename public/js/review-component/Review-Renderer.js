@@ -5,7 +5,7 @@ export class ReviewRenderer {
   /**
    * Creates an instance of Review.
    *
-   * @param {*} shadowRoot - the shadow root of the review-component.
+   * @param {ShadowRoot} shadowRoot - the shadow root of the review-component.
    */
   constructor (shadowRoot) {
     this.shadowRoot = shadowRoot
@@ -14,7 +14,7 @@ export class ReviewRenderer {
   /**
   * Renders reviews in the DOM.
   *
-  * @param {*} reviews - a list with reviews.
+  * @param {Array<Object>} reviews - a list with reviews.
   */
   renderReviews (reviews) {
     const reviewSection = this.shadowRoot.getElementById('review-section')
