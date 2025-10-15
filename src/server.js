@@ -36,7 +36,7 @@ try {
   // Register routes.
   app.use('/', router)
 
-  app.use((err, req, res, next) => {
+  app.use((err, req, res, _next) => {
     console.error(err.message, { error: err })
 
     if (err.status === 404) {

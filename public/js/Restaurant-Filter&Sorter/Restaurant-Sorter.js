@@ -56,20 +56,20 @@ export class RestaurantSorter {
 
     restaurantWrappers.sort((firstRestaurant, secondRestaurant) => {
       switch (sortType) {
-        case 'Top-Rated':
-          return this.#compareByRating(secondRestaurant, firstRestaurant)
+      case 'Top-Rated':
+        return this.#compareByRating(secondRestaurant, firstRestaurant)
 
-        case 'Lowest-Rated':
-          return this.#compareByRating(firstRestaurant, secondRestaurant)
+      case 'Lowest-Rated':
+        return this.#compareByRating(firstRestaurant, secondRestaurant)
 
-        case 'Highest-Price':
-          return this.#compareByPrice(secondRestaurant, firstRestaurant)
+      case 'Highest-Price':
+        return this.#compareByPrice(secondRestaurant, firstRestaurant)
 
-        case 'Lowest-Price':
-          return this.#compareByPrice(firstRestaurant, secondRestaurant)
+      case 'Lowest-Price':
+        return this.#compareByPrice(firstRestaurant, secondRestaurant)
 
-        default:
-          return 0
+      default:
+        return 0
       }
     })
     this.#updateRestaurantOrder(restaurantWrappers)

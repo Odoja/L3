@@ -12,9 +12,9 @@ export class HomeController {
    * @param {Function} next - Express next middleware function.
    */
   async MainIndex (req, res, next) {
-  try {
-    const restaurantData = (await RestaurantModel.find())
-      .map(restaurant => restaurant.toObject())
+    try {
+      const restaurantData = (await RestaurantModel.find())
+        .map(restaurant => restaurant.toObject())
 
       // console.log(restaurantData)
         

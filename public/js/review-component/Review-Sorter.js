@@ -67,20 +67,20 @@ export class ReviewSorter {
    */
   sortReviewsByOption(reviews, sortOption) {
     switch (sortOption) {
-      case 'Newest':
-        reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        break
-      case 'Oldest':
-        reviews.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
-        break
-      case 'Top-rated':
-        reviews.sort((a, b) => b.rating - a.rating)
-        break
-      case 'Lowest-rated':
-        reviews.sort((a, b) => a.rating - b.rating)
-        break
-      default:
-        break
+    case 'Newest':
+      reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      break
+    case 'Oldest':
+      reviews.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+      break
+    case 'Top-rated':
+      reviews.sort((a, b) => b.rating - a.rating)
+      break
+    case 'Lowest-rated':
+      reviews.sort((a, b) => a.rating - b.rating)
+      break
+    default:
+      break
     }
   }
 }
