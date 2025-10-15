@@ -1,4 +1,4 @@
-import { RestaurantModel } from '../models/RestaurantModel.js'
+import { RestaurantSchema } from '../models/schemas/RestaurantSchema.js'
 
 /**
  * Encapsulates a controller.
@@ -13,11 +13,11 @@ export class HomeController {
    */
   async MainIndex (req, res, next) {
     try {
-      const restaurantData = (await RestaurantModel.find())
+      const restaurantData = (await RestaurantSchema.find())
         .map(restaurant => restaurant.toObject())
 
       // console.log(restaurantData)
-        
+
       res.render('Huvudsida/index', { restaurantData })
     } catch (error) {
       next(error)
@@ -27,7 +27,7 @@ export class HomeController {
   async RestaurantPage (req, res, next) {
     try {
       const restaurantId = req.params.id
-      const restaurantData = await RestaurantModel.findById(restaurantId)
+      const restaurantData = await RestaurantSchema.findById(restaurantId)
 
       // console.log(restaurantData)
 

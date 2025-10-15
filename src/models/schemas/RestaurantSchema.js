@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import { BASE_SCHEMA } from './baseSchema.js'
-import { reviewSchema } from './ReviewModel.js'
+import { BASE_SCHEMA } from './BaseSchema.js'
+import { reviewSchema } from './ReviewSchema.js'
 
 // Restaurant schema
 const restaurantSchema = new mongoose.Schema({
@@ -40,4 +40,4 @@ restaurantSchema.virtual('averageRating').get(function () {
   }
 })
 
-export const RestaurantModel = mongoose.model('Restaurants', restaurantSchema)
+export const RestaurantSchema = mongoose.model('Restaurants', restaurantSchema)
