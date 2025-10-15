@@ -100,7 +100,7 @@ customElements.define('review-component',
     /**
      * Takes the rating obtained from param and gives the input value/the current rating the same.
      *
-     * @param {*} rating - data value from stars.
+     * @param {string} rating - data value from stars.
      */
     setRating (rating) {
       this.currentRating = rating
@@ -111,7 +111,7 @@ customElements.define('review-component',
     /**
      * Updates the star color depending on the selected amount of stars.
      *
-     * @param {*} rating - the amount of stars to be displayed.
+     * @param {string} rating - the amount of stars to be displayed.
      */
     ratingDisplay (rating) {
       this.stars.forEach((star) => {

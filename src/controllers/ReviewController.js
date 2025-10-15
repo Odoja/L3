@@ -49,9 +49,9 @@ export class ReviewController {
       })
       await restaurant.save()
 
-      // Send back just the newly created review
+      // Send back the newly created review
       const newReview = restaurant.reviews[restaurant.reviews.length - 1]
-      
+
       //console.log(newReview)
 
       res.status(201).json({
