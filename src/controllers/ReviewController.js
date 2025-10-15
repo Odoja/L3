@@ -1,4 +1,5 @@
-import { RestaurantModel } from '../models/RestaurantModel.js'
+import { RestaurantSchema } from '../models/schemas/RestaurantSchema.js'
+import { ReviewModel } from '../models/ReviewModel.js'
 
 /**
  * Encapsulates a controller.
@@ -17,7 +18,7 @@ export class ReviewController {
       const restaurantId = req.params.id
       // console.log('ID:' + restaurantId)
 
-      const restaurant = await RestaurantModel.findById(
+      const restaurant = await RestaurantSchema.findById(
         restaurantId,
         { reviews: 1 }
       )
@@ -41,7 +42,14 @@ export class ReviewController {
 
       //console.log('Received data:', { username, review, rating, restaurantId })
 
-      const restaurant = await RestaurantModel.findById(restaurantId)
+      const reviewModel = new ReviewModel({ username, review, rating })
+
+      const errors = reviewModel.validate()
+      if (errors.length > 0) {
+        return res.status(400).json({ errors })
+      }
+
+      const restaurant = await RestaurantSchema.findById(restaurantId)
       restaurant.reviews.push({
         username,
         review,
@@ -51,8 +59,6 @@ export class ReviewController {
 
       // Send back the newly created review
       const newReview = restaurant.reviews[restaurant.reviews.length - 1]
-
-      //console.log(newReview)
 
       res.status(201).json({
         success: true,
