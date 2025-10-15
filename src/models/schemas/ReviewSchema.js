@@ -6,20 +6,16 @@ export const reviewSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    trim: true,
-    maxlength: 40
+    trim: true
   },
   review: {
     type: String,
     required: true,
-    trim: true,
-    maxlength: 200
+    trim: true
   },
   rating: {
     type: Number,
-    required: true,
-    min: 1,
-    max: 5
+    required: true
   }
 }, {
   timestamps: true
