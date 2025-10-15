@@ -1,0 +1,29 @@
+html {
+  color: #888;
+  font-family: sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 20px;
+}
+
+h1 {
+  color: #555;
+  margin-bottom: 0;
+}
+
+p {
+  margin: 0 auto;
+  width: 280px;
+}
