@@ -6,8 +6,7 @@ En webbapplikation för att utforska, filtrera och recensera restauranger.
 
 - **[Vision](./docs/Vision.md)** - Vision och baskrav
 - **[Krav](./docs/Krav.md)** - Detaljerad kravspecifikation
-- **[Testplan](./docs/Testplan.md)** - Testfall och teststrategi
-- **[Testresultat](./docs/TESTRESULTAT.md)** - Testresultat
+- **[Testspecifikation](./docs/Testplan.md)** - Teststrategi, Testfall
 
 ## Komma igång
 
