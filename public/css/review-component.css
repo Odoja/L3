@@ -3,11 +3,6 @@
   margin: auto;
   padding: inherit;
 
-  h1 {
-    margin: 20px 0 20px 5px;
-    font-weight: 500;
-  }
-
   #top-section {
     display: flex;
     flex-direction: column;
@@ -170,5 +165,31 @@
 
   .hidden {
     display: none;
+  }
+
+  h1 {
+    margin: 20px 0 20px 5px;
+    font-weight: 500;
+  }
+
+  .error-message {
+    background-color: #fee;
+    border: 1px solid #f88;
+    border-radius: 7px;
+    color: #c33;
+    margin: 2% 0;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    min-height: 20px;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+
+
+  }
+
+  .error-message.hidden {
+    opacity: 0;
+    visibility: hidden;
   }
 }
