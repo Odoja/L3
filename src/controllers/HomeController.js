@@ -11,12 +11,10 @@ export class HomeController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  async MainIndex (req, res, next) {
+  async MainIndex(req, res, next) {
     try {
       const restaurantData = (await RestaurantSchema.find())
         .map(restaurant => restaurant.toObject())
-
-      // console.log(restaurantData)
 
       res.render('Huvudsida/index', { restaurantData })
     } catch (error) {
@@ -24,15 +22,13 @@ export class HomeController {
     }
   }
 
-  async RestaurantPage (req, res, next) {
+  async RestaurantPage(req, res, next) {
     try {
-      const restaurantId = req.params.id
-      const restaurantData = await RestaurantSchema.findById(restaurantId)
-
-      // console.log(restaurantData)
+      const restaurantData = await RestaurantSchema.findById(req.params.id)
 
       res.render('Restaurangsida/index', { restaurantData })
     } catch (error) {
+      error.status = 404
       next(error)
     }
   }
