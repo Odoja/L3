@@ -1,10 +1,10 @@
+import { ReviewService } from '../services/ReviewService.js'
 import { RestaurantSchema } from '../models/schemas/RestaurantSchema.js'
-import { ReviewModel } from '../models/ReviewModel.js'
-
 /**
  * Encapsulates a controller.
  */
 export class ReviewController {
+  #reviewService = new ReviewService()
 
   /**
    * Displays reviews for a specific restaurant.
@@ -16,14 +16,12 @@ export class ReviewController {
   async restaurantReviews(req, res, next) {
     try {
       const restaurantId = req.params.id
-      // console.log('ID:' + restaurantId)
 
       const restaurant = await RestaurantSchema.findById(
         restaurantId,
         { reviews: 1 }
       )
 
-      //console.log(restaurant)
       res.json(restaurant.reviews)
     } catch (error) {
       next(error)
@@ -31,42 +29,17 @@ export class ReviewController {
   }
 
   /**
-   * Creates a new post.
+   * Creates a new review.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
    */
   async createReview(req, res) {
     try {
-      const { username, review, rating, restaurantId } = req.body
-
-      //console.log('Received data:', { username, review, rating, restaurantId })
-
-      const reviewModel = new ReviewModel({ username, review, rating })
-
-      const errors = reviewModel.validate()
-      if (errors.length > 0) {
-        return res.status(400).json({ errors })
-      }
-
-      const restaurant = await RestaurantSchema.findById(restaurantId)
-      restaurant.reviews.push({
-        username,
-        review,
-        rating
-      })
-      await restaurant.save()
-
-      // Send back the newly created review
-      const newReview = restaurant.reviews[restaurant.reviews.length - 1]
-
-      res.status(201).json({
-        success: true,
-        message: '',
-        review: newReview
-      })
+      const newReview = await this.#reviewService.createReview(req.body)
+      res.status(201).json({ review: newReview })
     } catch (error) {
-      res.status(400).json({ error: error.message })
+      res.status(400).json({ errors: error.errors || [error.message] })
     }
   }
 }
