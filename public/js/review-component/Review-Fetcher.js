@@ -29,7 +29,7 @@ export class ReviewFetcher {
   async fetchReviews() {
     try {
       const res = await fetch(`/review/restaurant/${this.restaurantId}`) // fill in your own fetch route
-      console.log(res)
+      // console.log(res)
 
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`)

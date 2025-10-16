@@ -62,8 +62,8 @@ customElements.define('review-component',
       this.currentRating = 0
       this.stars = this.shadowRoot.querySelectorAll('.star')
       this.ratingInput = this.shadowRoot.querySelector('#rating')
-      this.errorMessage = this.shadowRoot.querySelector('#error-message')
       this.form = this.shadowRoot.getElementById('review-form')
+      this.errorMessage = this.shadowRoot.querySelector('#error-message')
       this.reviewRenderer = new ReviewRenderer(this.shadowRoot)
       this.reviewSorter = new ReviewSorter(this.shadowRoot)
       this.reviewFetcher = new ReviewFetcher(this.shadowRoot)
@@ -75,7 +75,7 @@ customElements.define('review-component',
     connectedCallback() {
       this.ratingSetup()
       this.displayReviews()
-      this.formLogic()
+      this.formSetup()
       this.reviewSorter.sortSetup()
     }
 
@@ -142,10 +142,13 @@ customElements.define('review-component',
       }
     }
 
+
+    // Form Methods
+
     /**
      * Sets up the form submission logic.
      */
-    formLogic() {
+    formSetup() {
       this.form.addEventListener('submit', async (e) => {
         e.preventDefault()
         this.hideError()
@@ -157,24 +160,6 @@ customElements.define('review-component',
           this.displayError(error.message)
         }
       })
-    }
-
-    /**
-     * Displays error message.
-     *
-     * @param {string} message - Error message.
-     */
-    displayError(message) {
-      this.errorMessage.textContent = message
-      this.errorMessage.classList.remove('hidden')
-    }
-
-    /**
-     * Hides error message.
-     */
-    hideError() {
-      this.errorMessage.textContent = ''
-      this.errorMessage.classList.add('hidden')
     }
 
     /**
@@ -198,18 +183,13 @@ customElements.define('review-component',
         const errorData = await response.json()
         throw new Error(this.renderErrorMessage(errorData))
       } else {
-        this.resetForm()
+        this.form.reset()
+        this.setRating(0)
+        this.displayReviews()
       }
     }
 
-    /**
-     * Resets the form and fetches the reviews again to display the new review.
-     */
-    resetForm() {
-      this.form.reset()
-      this.setRating(0)
-      this.displayReviews()
-    }
+    // Error Methods
 
     /**
      * Renders the error message.
@@ -226,7 +206,18 @@ customElements.define('review-component',
         return 'Failed to submit review'
       }
     }
+
+    displayError(message) {
+      this.errorMessage.textContent = message
+      this.errorMessage.classList.remove('hidden')
+    }
+
+    hideError() {
+      this.errorMessage.textContent = ''
+      this.errorMessage.classList.add('hidden')
+    }
   }
 )
+
 
 
