@@ -53,6 +53,14 @@ customElements.define('review-component',
    * Represents a review-component element that can be used to create draggable popup windows.
    */
   class extends HTMLElement {
+    #stars
+    #ratingInput
+    #form
+    #errorMessage
+    #reviewRenderer
+    #reviewSorter
+    #reviewFetcher
+
     /**
      * Creates an instance of the review-component element.
      */
@@ -60,13 +68,13 @@ customElements.define('review-component',
       super()
       this.attachShadow({ mode: 'open' }).appendChild(template.content.cloneNode(true))
       this.currentRating = 0
-      this.stars = this.shadowRoot.querySelectorAll('.star')
-      this.ratingInput = this.shadowRoot.querySelector('#rating')
-      this.form = this.shadowRoot.getElementById('review-form')
-      this.errorMessage = this.shadowRoot.querySelector('#error-message')
-      this.reviewRenderer = new ReviewRenderer(this.shadowRoot)
-      this.reviewSorter = new ReviewSorter(this.shadowRoot)
-      this.reviewFetcher = new ReviewFetcher(this.shadowRoot)
+      this.#stars = this.shadowRoot.querySelectorAll('.star')
+      this.#ratingInput = this.shadowRoot.querySelector('#rating')
+      this.#form = this.shadowRoot.getElementById('review-form')
+      this.#errorMessage = this.shadowRoot.querySelector('#error-message')
+      this.#reviewRenderer = new ReviewRenderer(this.shadowRoot)
+      this.#reviewSorter = new ReviewSorter(this.shadowRoot)
+      this.#reviewFetcher = new ReviewFetcher(this.shadowRoot)
     }
 
     /**
@@ -74,16 +82,16 @@ customElements.define('review-component',
      */
     connectedCallback() {
       this.ratingSetup()
-      this.displayReviews()
-      this.formSetup()
-      this.reviewSorter.sortSetup()
+      this.#displayReviews()
+      this.#formSetup()
+      this.#reviewSorter.sortSetup()
     }
 
     /**
      * Setups the event listeners for the rating method.
      */
     ratingSetup() {
-      this.stars.forEach((star) => {
+      this.#stars.forEach((star) => {
         star.addEventListener('click', (star) => {
           const rating = star.currentTarget.getAttribute('data-value')
           this.setRating(rating)
@@ -91,11 +99,11 @@ customElements.define('review-component',
 
         star.addEventListener('mouseenter', (star) => {
           const currentStar = star.currentTarget.getAttribute('data-value')
-          this.displayRating(currentStar) // Stars are filled to the star the cursor is on.
+          this.#displayRating(currentStar) // Stars are filled to the star the cursor is on.
         })
 
         star.addEventListener('mouseleave', () => {
-          this.displayRating(this.currentRating) // Stars filled returned to the one that was selected.
+          this.#displayRating(this.currentRating) // Stars filled returned to the one that was selected.
         })
       })
     }
@@ -107,8 +115,8 @@ customElements.define('review-component',
      */
     setRating(rating) {
       this.currentRating = rating
-      this.ratingInput.value = rating
-      this.displayRating(rating)
+      this.#ratingInput.value = rating
+      this.#displayRating(rating)
     }
 
     /**
@@ -116,8 +124,8 @@ customElements.define('review-component',
      *
      * @param {string} rating - the amount of stars to be displayed.
      */
-    displayRating(rating) {
-      this.stars.forEach((star) => {
+    #displayRating(rating) {
+      this.#stars.forEach((star) => {
         const starValue = star.getAttribute('data-value')
 
         if (starValue <= rating) {
@@ -131,12 +139,12 @@ customElements.define('review-component',
     /**
      * Fetches the reviews from the database and displays them.
      */
-    async displayReviews() {
+    async #displayReviews() {
       try {
-        const reviews = await this.reviewFetcher.fetchReviews()
-        this.reviewSorter.displaySortOptions(reviews)
-        this.reviewSorter.sortReviewsByOption(reviews, 'Newest')
-        this.reviewRenderer.renderReviews(reviews)
+        const reviews = await this.#reviewFetcher.fetchReviews()
+        this.#reviewSorter.displaySortOptions(reviews)
+        this.#reviewSorter.sortReviewsByOption(reviews, 'Newest')
+        this.#reviewRenderer.renderReviews(reviews)
       } catch (err) {
         console.error(err)
       }
@@ -148,16 +156,16 @@ customElements.define('review-component',
     /**
      * Sets up the form submission logic.
      */
-    formSetup() {
-      this.form.addEventListener('submit', async (e) => {
+    #formSetup() {
+      this.#form.addEventListener('submit', async (e) => {
         e.preventDefault()
-        this.hideError()
+        this.#hideError()
 
-        const formData = new FormData(this.form)
+        const formData = new FormData(this.#form)
         try {
-          await this.submitReview(formData)
+          await this.#submitReview(formData)
         } catch (error) {
-          this.displayError(error.message)
+          this.#displayError(error.message)
         }
       })
     }
@@ -167,7 +175,7 @@ customElements.define('review-component',
      *
      * @param {FormData} formData - The form data to submit.
      */
-    async submitReview(formData) {
+    async #submitReview(formData) {
       const response = await fetch('/review/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -175,17 +183,17 @@ customElements.define('review-component',
           username: formData.get('username').trim(),
           review: formData.get('review').trim(),
           rating: formData.get('rating'),
-          restaurantId: this.reviewFetcher.restaurantId
+          restaurantId: this.#reviewFetcher.restaurantId
         })
       })
 
       if (!response.ok) {
         const errorData = await response.json()
-        throw new Error(this.renderErrorMessage(errorData))
+        throw new Error(this.#renderErrorMessage(errorData))
       } else {
-        this.form.reset()
+        this.#form.reset()
         this.setRating(0)
-        this.displayReviews()
+        this.#displayReviews()
       }
     }
 
@@ -197,7 +205,7 @@ customElements.define('review-component',
      * @param {object} errorData - Error data from server.
      * @returns - A string with the error message to be displayed.
      */
-    renderErrorMessage(errorData) {
+    #renderErrorMessage(errorData) {
       if (errorData.errors && errorData.errors.length > 0) {
         return errorData.errors.join(', ')
       } else if (errorData.error) {
@@ -207,14 +215,14 @@ customElements.define('review-component',
       }
     }
 
-    displayError(message) {
-      this.errorMessage.textContent = message
-      this.errorMessage.classList.remove('hidden')
+    #displayError(message) {
+      this.#errorMessage.textContent = message
+      this.#errorMessage.classList.remove('hidden')
     }
 
-    hideError() {
-      this.errorMessage.textContent = ''
-      this.errorMessage.classList.add('hidden')
+    #hideError() {
+      this.#errorMessage.textContent = ''
+      this.#errorMessage.classList.add('hidden')
     }
   }
 )

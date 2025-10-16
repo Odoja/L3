@@ -2,14 +2,20 @@
  * A class to render reviews.
  */
 export class ReviewFetcher {
+  #shadowRoot
+  #restaurantId
   /**
    * Creates an instance of Review.
    *
    * @param {ShadowRoot} shadowRoot - the shadow root of the review-component.
    */
   constructor(shadowRoot) {
-    this.shadowRoot = shadowRoot
-    this.restaurantId = this.getRestaurantId()
+    this.#shadowRoot = shadowRoot
+    this.#restaurantId = this.#getRestaurantId()
+  }
+
+  get restaurantId() {
+    return this.#restaurantId
   }
 
   /**
@@ -17,18 +23,18 @@ export class ReviewFetcher {
    * 
    * @returns {string} - the restaurant ID from the URL.
    */
-  getRestaurantId() {
+  #getRestaurantId() {
     return window.location.pathname.split('/').pop()
   }
 
   /**
- * Fetches reviws from the databas.
+ * Fetches reviews from the database.
  *
  * @returns {Promise<Array>} - Array of review objects.
  */
   async fetchReviews() {
     try {
-      const res = await fetch(`/review/restaurant/${this.restaurantId}`) // fill in your own fetch route
+      const res = await fetch(`/review/restaurant/${this.#restaurantId}`) // fill in your own fetch route
       // console.log(res)
 
       if (!res.ok) {

@@ -2,13 +2,14 @@
  * A class to render reviews.
  */
 export class ReviewRenderer {
+  #shadowRoot
   /**
    * Creates an instance of Review.
    *
    * @param {ShadowRoot} shadowRoot - the shadow root of the review-component.
    */
   constructor (shadowRoot) {
-    this.shadowRoot = shadowRoot
+    this.#shadowRoot = shadowRoot
   }
 
   /**
@@ -17,37 +18,37 @@ export class ReviewRenderer {
   * @param {Array<Object>} reviews - a list with reviews.
   */
   renderReviews (reviews) {
-    const reviewSection = this.shadowRoot.getElementById('review-section')
+    const reviewSection = this.#shadowRoot.getElementById('review-section')
     reviewSection.innerHTML = ''
 
     reviews.forEach(review => {
-      reviewSection.appendChild(this.createReviewContainer(review))
+      reviewSection.appendChild(this.#createReviewContainer(review))
     })
   }
 
   // Helper methods
-  createReviewContainer (review) {
+  #createReviewContainer (review) {
     const container = document.createElement('div')
     container.classList.add('review-container')
-    container.appendChild(this.createUsername(review))
-    container.appendChild(this.createReview(review))
-    container.appendChild(this.createRating(review))
+    container.appendChild(this.#createUsername(review))
+    container.appendChild(this.#createReview(review))
+    container.appendChild(this.#createRating(review))
     return container
   }
 
-  createUsername (review) {
+  #createUsername (review) {
     const username = document.createElement('h4')
     username.textContent = review.username
     return username
   }
 
-  createReview (review) {
+  #createReview (review) {
     const reviewText = document.createElement('p')
     reviewText.textContent = review.review
     return reviewText
   }
 
-  createRating (review) {
+  #createRating (review) {
     const amountOfStars = review.rating
 
     const rating = document.createElement('div')

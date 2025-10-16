@@ -5,24 +5,27 @@ import { ReviewRenderer } from './Review-Renderer.js'
  * A class to render reviews.
  */
 export class ReviewSorter {
+  #shadowRoot
+  #reviewFetcher
+  #reviewRenderer
   /**
    * Creates an instance of Review.
    *
    * @param {ShadowRoot} shadowRoot - the shadow root of the review-component.
    */
   constructor(shadowRoot) {
-    this.shadowRoot = shadowRoot
-    this.reviewFetcher = new ReviewFetcher(this.shadowRoot)
-    this.reviewRenderer = new ReviewRenderer(this.shadowRoot)
+    this.#shadowRoot = shadowRoot
+    this.#reviewFetcher = new ReviewFetcher(this.#shadowRoot)
+    this.#reviewRenderer = new ReviewRenderer(this.#shadowRoot)
   }
 
   /**
    * Setups the event listeners for sorting.
    */
   sortSetup() {
-    const sortOption = this.shadowRoot.getElementById('sort-option')
+    const sortOption = this.#shadowRoot.getElementById('sort-option')
     sortOption.addEventListener('change', (event) => {
-      this.reviewSorting(event.target.value)
+      this.#reviewSorting(event.target.value)
     })
   }
 
@@ -31,14 +34,14 @@ export class ReviewSorter {
    *
    * @param {string} sortOption - the sorting the code is going to sort by.
    */
-  async reviewSorting(sortOption) {
+  async #reviewSorting(sortOption) {
     try {
-      const reviews = await this.reviewFetcher.fetchReviews()
+      const reviews = await this.#reviewFetcher.fetchReviews()
 
       this.displaySortOptions(reviews)
       this.sortReviewsByOption(reviews, sortOption)
 
-      this.reviewRenderer.renderReviews(reviews)
+      this.#reviewRenderer.renderReviews(reviews)
     } catch (error) {
       console.error(error)
     }
@@ -50,7 +53,7 @@ export class ReviewSorter {
    * @param {Array<Object>} reviews - a list with reviews.
    */
   displaySortOptions(reviews) {
-    const sortList = this.shadowRoot.getElementById('sort-option')
+    const sortList = this.#shadowRoot.getElementById('sort-option')
 
     if (!reviews || reviews.length === 0) {
       sortList.classList.add('hide-select')
