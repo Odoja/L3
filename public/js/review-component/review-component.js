@@ -37,7 +37,7 @@ template.innerHTML = `
       <div id="error-message" class="error-message hidden"></div>
     </form>
     <div id="review-wrapper"> 
-      <select name="" id="sort-option" class="hidden">
+      <select name="" id="sort-option" class="hide-select">
         <option value="Newest" selected>Newest Reviews</option>
         <option value="Oldest">Oldest Reviews</option>
         <option value="Top-rated">Highest Rating</option>
@@ -63,6 +63,7 @@ customElements.define('review-component',
       this.stars = this.shadowRoot.querySelectorAll('.star')
       this.ratingInput = this.shadowRoot.querySelector('#rating')
       this.errorMessage = this.shadowRoot.querySelector('#error-message')
+      this.form = this.shadowRoot.getElementById('review-form')
       this.reviewRenderer = new ReviewRenderer(this.shadowRoot)
       this.reviewSorter = new ReviewSorter(this.shadowRoot)
       this.reviewFetcher = new ReviewFetcher(this.shadowRoot)
@@ -142,55 +143,27 @@ customElements.define('review-component',
     }
 
     /**
-     * Handles form data and sends it to a database through a POST request.
+     * Sets up the form submission logic.
      */
     formLogic() {
-      const form = this.shadowRoot.getElementById('review-form')
-
-      form.addEventListener('submit', async (e) => {
+      this.form.addEventListener('submit', async (e) => {
         e.preventDefault()
         this.hideError()
 
-        const formData = new FormData(form)
-
+        const formData = new FormData(this.form)
         try {
-          const response = await fetch('/review/create', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              username: formData.get('username').trim(),
-              review: formData.get('review').trim(),
-              rating: formData.get('rating'),
-              restaurantId: this.reviewFetcher.restaurantId
-            })
-          })
-
-          if (response.ok) {
-            form.reset()
-            this.setRating(0)
-            this.displayReviews()
-          } else {
-            const errorData = await response.json()
-
-            if (errorData.errors && errorData.errors.length > 0) {
-              this.displayError(errorData.errors.join(', '))
-            } else if (errorData.error) {
-              this.displayError(errorData.error)
-            } else {
-              this.displayError('Failed to submit review')
-            }
-          }
-        } catch {
-          this.displayError('An error occurred while submitting your review')
+          await this.submitReview(formData)
+        } catch (error) {
+          this.displayError(error.message)
         }
       })
     }
 
     /**
-   * Displays error message.
-   *
-   * @param {string} message - Error message.
-   */
+     * Displays error message.
+     *
+     * @param {string} message - Error message.
+     */
     displayError(message) {
       this.errorMessage.textContent = message
       this.errorMessage.classList.remove('hidden')
@@ -203,5 +176,57 @@ customElements.define('review-component',
       this.errorMessage.textContent = ''
       this.errorMessage.classList.add('hidden')
     }
+
+    /**
+     * Submits the review form data to the server.
+     *
+     * @param {FormData} formData - The form data to submit.
+     */
+    async submitReview(formData) {
+      const response = await fetch('/review/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: formData.get('username').trim(),
+          review: formData.get('review').trim(),
+          rating: formData.get('rating'),
+          restaurantId: this.reviewFetcher.restaurantId
+        })
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(this.renderErrorMessage(errorData))
+      } else {
+        this.resetForm()
+      }
+    }
+
+    /**
+     * Resets the form and fetches the reviews again to display the new review.
+     */
+    resetForm() {
+      this.form.reset()
+      this.setRating(0)
+      this.displayReviews()
+    }
+
+    /**
+     * Renders the error message.
+     *
+     * @param {object} errorData - Error data from server.
+     * @returns - A string with the error message to be displayed.
+     */
+    renderErrorMessage(errorData) {
+      if (errorData.errors && errorData.errors.length > 0) {
+        return errorData.errors.join(', ')
+      } else if (errorData.error) {
+        return errorData.error
+      } else {
+        return 'Failed to submit review'
+      }
+    }
   }
 )
+
+

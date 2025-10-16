@@ -53,9 +53,9 @@ export class ReviewSorter {
     const sortList = this.shadowRoot.getElementById('sort-option')
 
     if (!reviews || reviews.length === 0) {
-      sortList.classList.add('hidden')
+      sortList.classList.add('hide-select')
     } else {
-      sortList.classList.remove('hidden')
+      sortList.classList.remove('hide-select')
     }
   }
 

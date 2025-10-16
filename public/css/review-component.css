@@ -161,11 +161,14 @@
     &:hover {
       border-color: #999;
     }
+
+
   }
 
-  .hidden {
+  .hide-select {
     display: none;
   }
+
 
   h1 {
     margin: 20px 0 20px 5px;
@@ -184,8 +187,6 @@
     min-height: 20px;
     opacity: 1;
     transition: opacity 0.3s ease;
-
-
   }
 
   .error-message.hidden {
