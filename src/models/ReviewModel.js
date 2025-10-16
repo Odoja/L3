@@ -24,19 +24,48 @@ export class ReviewModel {
    * Validates the review data.
    */
   validate() {
-    this.#blackList()
+    this.#blackListedWords()
     this.#errors()
-    
-  }
-
-  #blackList() {
 
   }
-  
+
+  #blackListedWords() {
+    const blacklist = [
+      // Svenska grova ord
+      'hora', 'slyna', 'slampa', 'fitta', 'kuk', 'bög',
+
+      // Engelska grova ord  
+      'whore', 'slut', 'cunt', 'pussy', 'cock', 'dick', 'faggot', 'retard', 'bitch', 'motherfucker'
+    ]
+
+    for (const word of blacklist) {
+      if (this.#reviewText.toLowerCase().includes(word) || this.#username.toLowerCase().includes(word)) {
+        throw new Error('Review contains inappropriate language')
+      }
+    }
+  }
+
   /**
    * Checks for errors and throws if any found.
    */
   #errors() {
+    // Multiple errors
+    if (this.#username.length === 0 && this.#reviewText.length === 0 && (!this.#rating || this.#rating < 1 || this.#rating > 5)) {
+      throw new Error('All fields are required')
+    }
+
+    if (this.#username.length === 0 && this.#reviewText.length === 0) {
+      throw new Error('Username and review text are required')
+    }
+
+    if (this.#username.length === 0 && (!this.#rating || this.#rating < 1 || this.#rating > 5)) {
+      throw new Error('Username and rating are required')
+    }
+
+    if (this.#reviewText.length === 0 && (!this.#rating || this.#rating < 1 || this.#rating > 5)) {
+      throw new Error('Review text and rating are required')
+    }
+
     // Single error
     if (this.#username.length === 0) {
       throw new Error('Username is required')
@@ -56,23 +85,6 @@ export class ReviewModel {
 
     if (!this.#rating || this.#rating < 1 || this.#rating > 5) {
       throw new Error('A rating between 1 and 5 is required')
-    }
-
-    // Multiple errors
-    if (this.#username.length === 0 && this.#reviewText.length === 0 && (!this.#rating || this.#rating < 1 || this.#rating > 5)) {
-      throw new Error('All fields are required')
-    }
-
-    if (this.#username.length === 0 && this.#reviewText.length === 0) {
-      throw new Error('Username and review text are required')
-    }
-
-    if (this.#username.length === 0 && (!this.#rating || this.#rating < 1 || this.#rating > 5)) {
-      throw new Error('Username and rating are required')
-    }
-
-    if (this.#reviewText.length === 0 && (!this.#rating || this.#rating < 1 || this.#rating > 5)) {
-      throw new Error('Review text and rating are required')
     }
   }
 }
