@@ -32,4 +32,5 @@
 
 ### Arkitektur:
 - **MVC-pattern**
-- **Server-side rendering**
+- **Hybrid rendering**
+- **Web Components**

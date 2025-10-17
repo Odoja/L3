@@ -114,3 +114,15 @@
 | TC-039 | Ny recension visas i listan | Skapa ny recension | Den nya recensionen visas i recensionslistan **utan att ladda om sidan** | ✅ |
 | TC-040 | Ny recension visas högst upp | Sortering är "Newest Reviews". Skapa ny recension | Den nya recensionen visas högst upp i listan | ✅ |
 | TC-041 | Formuläret återställs | Skapa recension med namn "Test", text "Bra!", 4 stjärnor | Efter skickad recension är alla fält tomma och stjärnorna återställda (inga ifyllda stjärnor) | ✅ |
+
+---
+
+### **Validering av recensioner**
+
+| Test-ID | Testfall | Indata | Förväntat utfall | Resultat |
+|---------|----------|--------|------------------|--------|
+| TC-042 | För långt användarnamn | Namn med 40+ tecken, recension, och betyg. Klicka "Send" | Felmeddelande: "Username cannot be longer than 40 characters" | ✅ |
+| TC-043 | För lång recensionstext | Namn, recension med 200+ tecken, och betyg. Klicka "Send" | Felmeddelande: "Review cannot be longer than 200 characters" | ✅ |
+| TC-044 | Profanity filter | Namn, recension med blockerat ord (ex: "slyna"), och betyg. Klicka "Send" | Felmeddelande: "Review contains inappropriate language" | ✅ |
+| TC-045 | Whitespace i fält | Namn: "  ", recension: "  ", betyg: 3. Klicka "Send" | Felmeddelande om saknade fält (whitespace räknas som tomt) | ✅ |
+| TC-046 | Ogiltigt betyg | Namn, recension, inget betyg valt | Felmeddelande: "Rating is required" | ✅ |
