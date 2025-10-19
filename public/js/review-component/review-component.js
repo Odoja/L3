@@ -83,7 +83,7 @@ customElements.define('review-component',
     connectedCallback() {
       this.ratingSetup()
       this.#displayReviews()
-      this.#formSetup()
+      this.#setupForm()
       this.#reviewSorter.sortSetup()
     }
 
@@ -156,7 +156,7 @@ customElements.define('review-component',
     /**
      * Sets up the form submission logic.
      */
-    #formSetup() {
+    #setupForm() {
       this.#form.addEventListener('submit', async (e) => {
         e.preventDefault()
         this.#hideError()

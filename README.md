@@ -2,6 +2,8 @@
 
 En webbapplikation för att utforska, filtrera och recensera restauranger.
 
+Driftsatt på https://restaurantworld.up.railway.app/
+
 ## Dokumentation
 
 - **[Vision](./docs/Vision.md)** - Vision och baskrav
