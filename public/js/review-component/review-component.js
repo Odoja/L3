@@ -1,6 +1,7 @@
 import { ReviewFetcher } from './Review-Fetcher.js'
 import { ReviewRenderer } from './Review-Renderer.js'
 import { ReviewSorter } from './Review-Sorter.js'
+import { ReviewRating } from './Review-Rating.js'
 
 const template = document.createElement('template')
 template.innerHTML = `
@@ -53,13 +54,12 @@ customElements.define('review-component',
    * Represents a review-component element that can be used to create draggable popup windows.
    */
   class extends HTMLElement {
-    #stars
-    #ratingInput
     #form
     #errorMessage
     #reviewRenderer
     #reviewSorter
     #reviewFetcher
+    #reviewRating
 
     /**
      * Creates an instance of the review-component element.
@@ -67,73 +67,22 @@ customElements.define('review-component',
     constructor() {
       super()
       this.attachShadow({ mode: 'open' }).appendChild(template.content.cloneNode(true))
-      this.currentRating = 0
-      this.#stars = this.shadowRoot.querySelectorAll('.star')
-      this.#ratingInput = this.shadowRoot.querySelector('#rating')
       this.#form = this.shadowRoot.getElementById('review-form')
       this.#errorMessage = this.shadowRoot.querySelector('#error-message')
       this.#reviewRenderer = new ReviewRenderer(this.shadowRoot)
       this.#reviewSorter = new ReviewSorter(this.shadowRoot)
       this.#reviewFetcher = new ReviewFetcher(this.shadowRoot)
+      this.#reviewRating = new ReviewRating(this.shadowRoot)
     }
 
     /**
      * Sets up event listeners when the element is connected to the DOM.
      */
     connectedCallback() {
-      this.ratingSetup()
+      this.#reviewRating.ratingSetup()
       this.#displayReviews()
       this.#setupForm()
       this.#reviewSorter.sortSetup()
-    }
-
-    /**
-     * Setups the event listeners for the rating method.
-     */
-    ratingSetup() {
-      this.#stars.forEach((star) => {
-        star.addEventListener('click', (star) => {
-          const rating = star.currentTarget.getAttribute('data-value')
-          this.setRating(rating)
-        })
-
-        star.addEventListener('mouseenter', (star) => {
-          const currentStar = star.currentTarget.getAttribute('data-value')
-          this.#displayRating(currentStar) // Stars are filled to the star the cursor is on.
-        })
-
-        star.addEventListener('mouseleave', () => {
-          this.#displayRating(this.currentRating) // Stars filled returned to the one that was selected.
-        })
-      })
-    }
-
-    /**
-     * Takes the rating obtained from param and gives the input value/the current rating the same.
-     *
-     * @param {string} rating - data value from stars.
-     */
-    setRating(rating) {
-      this.currentRating = rating
-      this.#ratingInput.value = rating
-      this.#displayRating(rating)
-    }
-
-    /**
-     * Updates the star color depending on the selected amount of stars.
-     *
-     * @param {string} rating - the amount of stars to be displayed.
-     */
-    #displayRating(rating) {
-      this.#stars.forEach((star) => {
-        const starValue = star.getAttribute('data-value')
-
-        if (starValue <= rating) {
-          star.classList.add('filled')
-        } else {
-          star.classList.remove('filled')
-        }
-      })
     }
 
     /**
@@ -149,7 +98,6 @@ customElements.define('review-component',
         console.error(err)
       }
     }
-
 
     // Form Methods
 
@@ -192,7 +140,7 @@ customElements.define('review-component',
         throw new Error(this.#renderErrorMessage(errorData))
       } else {
         this.#form.reset()
-        this.setRating(0)
+        this.#reviewRating.setRating(0)
         this.#displayReviews()
       }
     }
