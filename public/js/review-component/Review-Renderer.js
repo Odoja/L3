@@ -12,11 +12,6 @@ export class ReviewRenderer {
     this.#shadowRoot = shadowRoot
   }
 
-  /**
-  * Renders reviews in the DOM.
-  *
-  * @param {Array<Object>} reviews - a list with reviews.
-  */
   renderReviews (reviews) {
     const reviewSection = this.#shadowRoot.getElementById('review-section')
     reviewSection.innerHTML = ''
