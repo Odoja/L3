@@ -51,7 +51,7 @@ template.innerHTML = `
 `
 customElements.define('review-component',
   /**
-   * Represents a review-component element that can be used to create draggable popup windows.
+   * Represents a review-component element.
    */
   class extends HTMLElement {
     #form
@@ -75,9 +75,6 @@ customElements.define('review-component',
       this.#reviewRating = new ReviewRating(this.shadowRoot)
     }
 
-    /**
-     * Sets up event listeners when the element is connected to the DOM.
-     */
     connectedCallback() {
       this.#reviewRating.ratingSetup()
       this.#displayReviews()
@@ -151,7 +148,7 @@ customElements.define('review-component',
      * Renders the error message.
      *
      * @param {object} errorData - Error data from server.
-     * @returns - A string with the error message to be displayed.
+     * @returns - A string with the error message.
      */
     #renderErrorMessage(errorData) {
       if (errorData.errors && errorData.errors.length > 0) {
